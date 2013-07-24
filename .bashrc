@@ -36,6 +36,12 @@
 #      execute commands from file instead of ~/.bashrc.
 #
 # -----------------------------------
+# -- 1.0) Source .bashfb
+# -----------------------------------
+if [ -f ~/.bashfb ]; then
+    source ~/.bashfb
+fi
+# -----------------------------------
 # -- 1.1) Set up umask permissions --
 # -----------------------------------
 #  The following incantation allows easy group modification of files.
@@ -181,6 +187,7 @@ alias treeacl='tree -A -C -L 2'
 
 # 2.3) Text and editor commands
 export EDITOR=vim
+export SVN_EDITOR=vim
 export VISUAL=vim
 
 # 2.4) grep options
