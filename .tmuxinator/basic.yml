@@ -1,0 +1,21 @@
+# ~/.tmuxinator/dev.yml
+
+project_name: basic
+project_root: ~/
+tabs:
+  - test:
+      layout: even-horizontal
+      panes:
+        - # empty, running bash
+        - # empty, running bash
+  - main:
+      layout: 5cc4,270x58,0,0{135x58,0,0,134x58,136,0[134x29,136,0,134x28,136,30]}
+      panes:
+        - vim
+        - # empty, running bash
+        - # empty, running bash
+  - py3:
+      layout: even-horizontal
+      panes:
+        - vim
+        - python3
