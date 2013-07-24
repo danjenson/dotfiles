@@ -1,4 +1,8 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Source .vimfb if exists
+if filereadable(glob("~/.vimfb"))
+    source ~/.vimfb
+endif
+
 " Plugins
 syntax on
 filetype indent plugin on
