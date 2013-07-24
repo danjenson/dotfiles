@@ -1,6 +1,3 @@
-# .bashrc file
-# By Balaji S. Srinivasan (balajis@stanford.edu)
-#
 # Concepts:
 #
 #    1) .bashrc is the *non-login* config for bash, run in scripts and after
@@ -37,9 +34,7 @@
 #      ~/.bashrc, if that file exists. This may be inhibited by using the
 #      --norc option. The --rcfile file option will force Bash to read and
 #      execute commands from file instead of ~/.bashrc.
-
-
-
+#
 # -----------------------------------
 # -- 1.1) Set up umask permissions --
 # -----------------------------------
@@ -160,10 +155,6 @@ fi
 # See: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
 shopt -s histappend
 
-# Make prompt informative
-# See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
-PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
-
 ## -----------------------
 ## -- 2) Set up aliases --
 ## -----------------------
@@ -189,10 +180,8 @@ alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
 # 2.3) Text and editor commands
-alias em='emacs -nw'     # No X11 windows
-alias eqq='emacs -nw -Q' # No config and no X11
-export EDITOR='emacs -nw'
-export VISUAL='emacs -nw' 
+export EDITOR=vim
+export VISUAL=vim
 
 # 2.4) grep options
 export GREP_OPTIONS='--color=auto'
@@ -223,5 +212,9 @@ fi
 ## -- 3) User-customized code  --
 ## ------------------------------
 
-## Define any user-specific variables you want here.
-source ~/.bashrc_custom
+# Make prompt informative
+# See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
+PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
+
+# Source tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator && tmuxinator dev
