@@ -1,0 +1,26 @@
+# ~/.tmuxinator/dev.yml
+
+project_name: dev
+project_root: ~/
+tabs:
+  - main:
+      layout: 4025,364x90,0,0{182x90,0,0,0,181x90,183,0[181x45,183,0,6,181x44,183,46,7]}
+      panes:
+        - vim
+        - presto payments 
+        - # empty, running bash
+  - py3: 
+      layout: even-horizontal
+      panes:
+        - vim
+        - python3.2
+  - play:
+      layout: even-horizontal
+      panes:
+        - 
+        - 
+  - db:
+      layout: even-horizontal
+      panes:
+        - presto payments
+        - h_ops
