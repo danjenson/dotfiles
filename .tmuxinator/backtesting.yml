@@ -1,0 +1,12 @@
+# ~/.tmuxinator/backtesting.yml
+
+project_name: backtesting
+project_root: ~/
+tabs:
+  - R:
+      layout: even-horizontal
+      panes:
+        - R
+        - presto payments 
+  - Extra:
+      layout: even-horizontal
