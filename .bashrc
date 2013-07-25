@@ -224,4 +224,4 @@ fi
 PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 
 # Source tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator && tmuxinator dev
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
