@@ -19,8 +19,6 @@ tabs:
       panes:
         - 
         - 
-  - db:
-      layout: even-horizontal
+  - irssi:
       panes:
-        - presto payments
-        - h_ops
+        - irssi
