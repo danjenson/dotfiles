@@ -37,6 +37,8 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-m> <C-w>_
+nmap \| <C-w>v
+nmap <C-_> <C-w>s
 
 " Command that listen for events
 autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
