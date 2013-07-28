@@ -219,6 +219,9 @@ fi
 ## -- 3) User-customized code  --
 ## ------------------------------
 
+# Set vi editing
+set -o vi
+
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
 PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
