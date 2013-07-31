@@ -232,4 +232,4 @@ PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 # Additional Aliases
 alias ta='tmux a -t'
 alias tl='tmux ls'
-alias sb='source /home/$USER/.bashrc'
+alias sb='source /home/$USER/.bashrc && echo ".bashrc REFRESHED!'
