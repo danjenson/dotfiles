@@ -13,12 +13,12 @@ tabs:
       layout: even-horizontal
       panes:
         - vim
-        - python3.2
-  - play:
+        - python3
+  - R:
       layout: even-horizontal
       panes:
-        - 
-        - 
+        - vim
+        - R
   - irssi:
       panes:
         - irssi
