@@ -4,12 +4,6 @@ run `vimtutor` from command line.
 
 SETUP:
 ===============================================================================
-set https_proxy:
-$ export https_proxy=fwdproxy.any.facebook.com:8080
-$ cd && git clone https://github.com/danjenson/dotfiles.git
-$ ln -s dotfiles/.vimrc .
-[OPTIONAL]: copy fb specific shortcuts
-$ cp /home/danj/.vimfb .
 [OPTIONAL]: map caps lock to control key
 System Preferences -> Keyboard -> Modifer Keys... -> Caps Lock Key: ^ Control
 NOTE: if you have multiple keyboards, make sure you do this for all of them
@@ -111,10 +105,8 @@ Searching (Search mode, initiated from Normal mode):
 ?{pattern}  search entire file backwards for pattern
 n           next search result
 N           previous search result
-f{char}     find the next char in the current line; place cursor on char
-F{char}     same as above, but reverse direction
-t{char}     find the next char in the currnet line; place cursor before char
-T{char}     same as above, but reverse direction
+c{char}     find the next char in the currnet line; place cursor before char
+ar}     same as above, but reverse direction
 ;           repeat last search (often used in conjunction with .)
 ,           repeat last search in reverse direction
 
@@ -141,7 +133,7 @@ a{punct}    select around {punct}
 {punct}     any of:  ) } ] ' " ` >
 
 ex. daw = delete a word and trailing space
-ex. ciw = change current word, switch to insert mode
+ex. ciw = delete current word, switch to insert mode
 
 Commands (Command/Ex mode):
 :                       initiate command line mode
