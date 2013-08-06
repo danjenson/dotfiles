@@ -4,10 +4,12 @@ run `vimtutor` from command line.
 
 SETUP:
 ===============================================================================
-cd && git clone https://github.com/danjenson/dotfiles.git
-ln -s dotfiles/.vimrc .
+set https_proxy:
+$ export https_proxy=fwdproxy.any.facebook.com:8080
+$ cd && git clone https://github.com/danjenson/dotfiles.git
+$ ln -s dotfiles/.vimrc .
 [OPTIONAL]: copy fb specific shortcuts
-cp /home/danj/.vimfb .
+$ cp /home/danj/.vimfb .
 [OPTIONAL]: map caps lock to control key
 System Preferences -> Keyboard -> Modifer Keys... -> Caps Lock Key: ^ Control
 NOTE: if you have multiple keyboards, make sure you do this for all of them
@@ -136,7 +138,10 @@ as          current sentence plus one space
 ap          current paragraph plus one space
 i{punct}    select inside {punct}
 a{punct}    select around {punct}
-{punct}     any of:  ) } ] ' " `
+{punct}     any of:  ) } ] ' " ` >
+
+ex. daw = delete a word and trailing space
+ex. ciw = change current word, switch to insert mode
 
 Commands (Command/Ex mode):
 :                       initiate command line mode
