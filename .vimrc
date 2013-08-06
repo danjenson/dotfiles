@@ -6,8 +6,10 @@ endif
 " Plugins
 syntax on
 filetype indent plugin on
-"Install this from github for easy plugins
-execute pathogen#infect() 
+" Install this from github for easy plugins
+if filereadable(glob("~/.vim/autoload/pathogen.vim"))
+    execute pathogen#infect() 
+endif
 
 " Setters
 set incsearch "Set search previewing
