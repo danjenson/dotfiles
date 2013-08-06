@@ -4,13 +4,12 @@ run `vimtutor` from command line.
 
 SETUP:
 ===============================================================================
+cd && ln -s dotfiles/.vimrc . && ln -s dotfiles/.vim
+
 [OPTIONAL]: map caps lock to control key
 System Preferences -> Keyboard -> Modifer Keys... -> Caps Lock Key: ^ Control
 NOTE: if you have multiple keyboards, make sure you do this for all of them
 to avoid confusion.
-[OPTIONAL]: install pathogen and vim commentary
-Pathogen: https://github.com/tpope/vim-pathogen
-Vim Commentary: https://github.com/tpope/vim-commentary
 
 BASIC CONCEPTS:
 ===============================================================================
@@ -53,6 +52,8 @@ Shift+]     move down a block
 Shift+[     move up a block
 Ctrl+o      move to previous jump point
 zz          move current line to center of screen
+zt          move current line to top of screen
+zb          move current line to bottom of screen
 
 *For more, run :h motion.txt in vim
 
@@ -147,7 +148,7 @@ a{punct}    select around {punct}
 ex. daw = delete a word and trailing space
 ex. ciw = delete current word, switch to insert mode
 
-Commands (Command/Ex mode):
+Commands (Command/Ex mode, see vim-unimpared plugin for shortcuts):
 :                       initiate command line mode
 /                       initiate command line mode (search)
 Ctrl+r+=                initiate command line mode (expression evaluator)
@@ -284,7 +285,7 @@ m{a-zA-Z}           place a mark at the current location (capital = global)
 `<                  move to start of last visual selection
 `>                  move to end of last visual selection
 
-Quicklist management:
+Quicklist management (see vim-unimpared plugin):
 :cnext          jump to next item
 :cprev          jump to previous item
 :cfirst         jump to first item
@@ -297,7 +298,7 @@ Quicklist management:
 :colder         recall previous list (vim stores past 10)
 :cnewer         open newer list
 
-Location list management (secondary list):
+Location list management (secondary list, see vim-unimpared plugin):
 :lnext          jump to next item
 :lprev          jump to previous item
 :lfirst         jump to first item
@@ -307,6 +308,32 @@ Location list management (secondary list):
 :ll {n}         jump to item n
 :lopen          open the quickfix window
 :lclose         open the quickfix window
+
+Unimpared vim plugin:
+[a         :previous
+]a         :next
+[A         :first
+]A         :last
+[b         :bprevious
+]b         :bnext
+[B         :bfirst
+]B         :blast
+[l         :lprevious
+]l         :lnext
+[L         :lfirst
+]L         :llast
+[<C-L>     :lpfile
+]<C-L>     :lnfile
+[q         :cprevious
+]q         :cnext
+[Q         :cfirst
+]Q         :clast
+[<C-Q>     :cpfile (Note that <C-Q> only works in a terminal if you disable
+]<C-Q>     :cnfile flow control: stty -ixon)
+[t         :tprevious
+]t         :tnext
+[T         :tfirst
+]T         :tlast
 
 Example filetype listening command for vimrc:
 if has("autocmd")
