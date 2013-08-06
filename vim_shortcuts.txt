@@ -16,7 +16,6 @@ to avoid confusion.
 Pathogen: https://github.com/tpope/vim-pathogen
 Vim Commentary: https://github.com/tpope/vim-commentary
 
-
 BASIC CONCEPTS:
 ===============================================================================
 Vim modes:
@@ -152,7 +151,7 @@ Ctrl+r+=                initiate command line mode (expression evaluator)
 :q!                     force quit (don't save changes)
 :qa!                    force close all buffers (don't save changes)
 :E                      directory explorer (Ctrl+^ to switch back to buffer)
-:find {file}            find file with name {file}; checks vim path    
+:find {file}            find file with name {file}; checks vim path
 :{range}d{x}            delete range and put in register x
 :{range}y{x}            yank range and put in register x
 :{line}p{x}             paste text in register x after line
@@ -210,7 +209,7 @@ qx{changes}q        generate macro x, execute with @x, reverse with u
 :set path+={path}   add {path} to current search path for vim
 {n}Ctrl-a           add n to the first number in current line (repeat for tmux)
 {n}Ctrl-x           subtract n from the first number in current line
-:Stab               set tab-width 
+:Stab               set tab-width
 Ctrl+r+{n}          access register n (0 is default for yank)
 Ctrl+r+=            access expression register
 q:                  open command line window with history of commands
@@ -232,9 +231,9 @@ Ctrl+r{register}    access {register} from insert mode
 
 Pattern matching and substitution:
 /                   regular search, special chars must be escaped
-/\v                 special chars (i.e. ), }, /) assume special meaning
-/\V                 literal search, no special chars
-/\v(word)           capture word
+/\v{pattern}        special chars (i.e. ), }, /) assume special meaning
+/\V{pattern}        literal search, no special chars
+/\v({pattern})      capture pattern
 \r                  carriage return
 \t                  tab
 \\                  single backslash
