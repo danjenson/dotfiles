@@ -83,7 +83,7 @@ gU{motion}  make uppercase
 >{motion}   shift right
 >>          shift current line right
 <{motion}   shift left
-<<          shit current line left
+<<          shift current line left
 J           join current line and next line
 ={motion}   autoindent
 !{motion}   drops into command mode with specified range selected
@@ -131,7 +131,7 @@ gv          reselect last visual selection
 o           go to other end of visual selection
 
 Special selectors (Normal, Visual modes):
-it          select inside current tag
+it          select inside current XML tag, i.e. <xml>DeleteThis</xml>
 at          select around current tag
 iw          current word
 iW          current WORD
@@ -234,7 +234,7 @@ g/TODO              print anything that matches TODO
 Registers:
 "{register}         access {register} from normal mode
 Ctrl+r{register}    access {register} from insert mode
-:reg {register}     access {register} from command line mode
+:reg {register}     access {register} from command line mode; no arg for all
 ""                  unnamed register; default for delete, yank, change
 "0                  default register for yank
 "+                  paste from X11 clipboard
@@ -243,6 +243,8 @@ Ctrl+r{register}    access {register} from insert mode
 ".                  last inserted text
 ":                  last Ex command
 "/                  last search command
+
+ex. "ayy = put current line in register a
 
 Pattern matching and substitution:
 /                   regular search, special chars must be escaped
@@ -285,6 +287,35 @@ m{a-zA-Z}           place a mark at the current location (capital = global)
 `<                  move to start of last visual selection
 `>                  move to end of last visual selection
 
+Unimpared vim plugin:
+[a         :previous (arg list)
+]a         :next (arg list)
+[A         :first (arg list)
+]A         :last (arg list)
+[b         :bprevious (buffer list)
+]b         :bnext (buffer list)
+[B         :bfirst (buffer list)
+]B         :blast (buffer list)
+[l         :lprevious (location list)
+]l         :lnext (location list)
+[L         :lfirst (location list)
+]L         :llast (location list)
+[<C-L>     :lpfile (location list)
+]<C-L>     :lnfile (location list)
+[q         :cprevious (quickfix list)
+]q         :cnext (quickfix list)
+[Q         :cfirst (quickfix list)
+]Q         :clast (quickfix list)
+[<C-Q>     :cpfile (quickfix list)
+]<C-Q>     :cnfile (quickfix list)
+[t         :tprevious (tabs)
+]t         :tnext (tabs)
+[T         :tfirst (tabs)
+]T         :tlast (tabs)
+
+(Note that <C-Q> only works in a terminal if you disable flow control:
+stty -ixon)
+
 Quicklist management (see vim-unimpared plugin):
 :cnext          jump to next item
 :cprev          jump to previous item
@@ -308,32 +339,6 @@ Location list management (secondary list, see vim-unimpared plugin):
 :ll {n}         jump to item n
 :lopen          open the quickfix window
 :lclose         open the quickfix window
-
-Unimpared vim plugin:
-[a         :previous
-]a         :next
-[A         :first
-]A         :last
-[b         :bprevious
-]b         :bnext
-[B         :bfirst
-]B         :blast
-[l         :lprevious
-]l         :lnext
-[L         :lfirst
-]L         :llast
-[<C-L>     :lpfile
-]<C-L>     :lnfile
-[q         :cprevious
-]q         :cnext
-[Q         :cfirst
-]Q         :clast
-[<C-Q>     :cpfile (Note that <C-Q> only works in a terminal if you disable
-]<C-Q>     :cnfile flow control: stty -ixon)
-[t         :tprevious
-]t         :tnext
-[T         :tfirst
-]T         :tlast
 
 Example filetype listening command for vimrc:
 if has("autocmd")
