@@ -308,10 +308,10 @@ Unimpared vim plugin:
 ]Q         :clast (quickfix list)
 [<C-Q>     :cpfile (quickfix list)
 ]<C-Q>     :cnfile (quickfix list)
-[t         :tprevious (tabs)
-]t         :tnext (tabs)
-[T         :tfirst (tabs)
-]T         :tlast (tabs)
+[t         :tprevious (tags)
+]t         :tnext (tags)
+[T         :tfirst (tags)
+]T         :tlast (tags)
 
 (Note that <C-Q> only works in a terminal if you disable flow control:
 stty -ixon)
@@ -365,6 +365,22 @@ gT              move to previous tab
 :tabo           keep only current tab
 :tabn           move to next tab
 :tabp           move to previous tab
+
+Code folding:
+zf{n}j          creates a fold from the cursor down {n} lines
+zf/{str}        creates a fold from cursor to {str}
+zk              previous fold
+zj              next fold
+zo              opens fold at cursor
+zO              opens all folds at cursor
+zm              increases fold level by one
+zM              colses all open folds
+zr              decreases fold level by one
+zR              opens all folds (decreases fold level to 0)
+zd              deletes the fold at the cursor
+zE              deletes all folds
+[z              move to start of open fold
+]z              move to end of open fold
 
 Spell checking (Normal mode):
 :set spell      initialize spell checker
