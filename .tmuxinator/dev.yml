@@ -8,16 +8,11 @@ tabs:
       panes:
         - # empty, running bash
         - # empty, running bash
-  - py3: 
+  - spill:
       layout: even-horizontal
       panes:
-        - vim
-        - python3
-  - R:
-      layout: even-horizontal
-      panes:
-        - vim
-        - R
+        - # empty, running bash
+        - # empty, running bash
   - irssi:
       panes:
         - irssi
