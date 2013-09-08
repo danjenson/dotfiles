@@ -38,8 +38,8 @@
 # -----------------------------------
 # -- 1.0) Source .bashfb
 # -----------------------------------
-if [ -f ~/.bash_local ]; then
-    source ~/.bash_local
+if [ -f ~/.bashrc_local ]; then
+    source ~/.bashrc_local
 fi
 # -----------------------------------
 # -- 1.1) Set up umask permissions --
