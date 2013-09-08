@@ -222,8 +222,14 @@ fi
 # Set vi editing
 set -o vi
 
+# Fix delete key in tmux
+stty erase 
+
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
+if [ -f /opt/local/share/git-core/git-prompt.sh ]; then
+    source /opt/local/share/git-core/git-prompt.sh # Macports bash_completion directory
+fi
 PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 
 # Source tmuxinator
@@ -232,6 +238,6 @@ PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 # Additional Aliases
 alias ta='tmux a -t'
 alias tls='tmux ls'
-alias sb='source /home/$USER/.bashrc && echo ".bashrc REFRESHED!"'
+alias sb='source ~/.bashrc && echo ".bashrc REFRESHED!"'
 alias brc='vim ~/.bashrc'
 alias ipy='ipython'
