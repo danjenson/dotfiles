@@ -1,6 +1,6 @@
 " Source .vimfb if exists
-if filereadable(glob("~/.vimfb"))
-    source ~/.vimfb
+if filereadable(glob("~/.vimrc_local"))
+    source ~/.vimrc_local
 endif
 
 " Plugins
