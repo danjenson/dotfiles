@@ -46,6 +46,12 @@ nmap <C-_> <C-w>s
 autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
 " Custom functions
+" Make pdf using latex
+command! Ltx call Ltx()
+function Ltx()
+    execute ':!pdflatex %'
+endfunction
+
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
 function! Stab()
