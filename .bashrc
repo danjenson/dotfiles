@@ -227,8 +227,8 @@ stty erase 
 
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
-if [ -f /opt/local/share/git-core/git-prompt.sh ]; then
-    source /opt/local/share/git-core/git-prompt.sh # Macports bash_completion directory
+if [ -f ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
 fi
 PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 
@@ -241,3 +241,4 @@ alias tls='tmux ls'
 alias sb='source ~/.bashrc && echo ".bashrc REFRESHED!"'
 alias brc='vim ~/.bashrc'
 alias ipy='ipython'
+alias nbk='ipython notebook --pylab inline'
