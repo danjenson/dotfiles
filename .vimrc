@@ -49,7 +49,7 @@ autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 " Make pdf using latex
 command! Ltx call Ltx()
 function Ltx()
-    execute ':!pdflatex %'
+    execute ':w | !pdflatex %'
 endfunction
 
 " Set tabstop, softtabstop and shiftwidth to the same value
