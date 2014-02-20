@@ -32,6 +32,7 @@ set showmode "Show editing mode in status (-- INSERT --)
 set ruler "Show cursor position
 set autoindent "Autoindents after returen
 set tags=tags;/
+set colorcolumn=81 "To help from going over 80 char limit
 
 " make split windows easier to navigate
 map <C-j> <C-w>j
