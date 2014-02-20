@@ -53,6 +53,12 @@ function Ltx()
     execute ':w | !pdflatex %'
 endfunction
 
+" Shorten syntastic check
+command! Chk call Chk()
+function Chk()
+    execute ':SyntasticCheck'
+endfunction
+
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
 function! Stab()
