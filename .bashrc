@@ -215,6 +215,10 @@ if [ -s ~/.nvm/nvm.sh ]; then
     nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
 fi
 
+# 2.8) history modifications
+# Erase any previous duplicates in history
+export HISTCONTROL=erasedups
+
 ## ------------------------------
 ## -- 3) User-customized code  --
 ## ------------------------------
