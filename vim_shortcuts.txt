@@ -51,6 +51,8 @@ G           move to last line in file
 Shift+]     move down a block
 Shift+[     move up a block
 Ctrl+o      move to previous jump point
+''          move to previous jump point
+Ctrl+d      shift back one indent
 zz          move current line to center of screen
 zt          move current line to top of screen
 zb          move current line to bottom of screen

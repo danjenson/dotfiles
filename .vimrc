@@ -11,6 +11,28 @@ if filereadable(glob("~/.vim/autoload/pathogen.vim"))
     execute pathogen#infect() 
 endif
 
+" Toggle supertab with \<tab> (<leader><tab>)
+let SuperTabMappingForward = '<leader><space>'
+let g:SuperTab_tab = 0
+function! ToggleSuperTabMap()
+  if g:SuperTab_tab == 1
+      let g:SuperTabMappingForward = "<leader><space>"
+
+      let g:SuperTabMappingTabLiteral = "<tab>"
+      so ~/.vim/plugin/supertab.vim
+      let g:SuperTab_tab = 0
+      echo "SuperTab key = <leader><space>"
+  else
+      let g:SuperTabMappingForward = "<tab>"
+      let g:SuperTabMappingTabLiteral = "<leader><space>"
+      so ~/.vim/plugin/supertab.vim
+      let g:SuperTab_tab = 1
+      echo "SuperTab key = <tab>"
+  endif
+endfunction
+map <leader><tab> :call ToggleSuperTabMap()<CR>
+imap <leader><tab> <esc>:call ToggleSuperTabMap()<CR>a
+
 " Setters
 set incsearch "Set search previewing
 set hlsearch "Highlight search items
