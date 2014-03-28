@@ -172,6 +172,7 @@ alias cp="cp -i"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
+alias ls='ls -F'
 alias ll="ls -alrtF --color"
 alias la="ls -A"
 alias l="ls -CF"
