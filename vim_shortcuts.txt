@@ -51,6 +51,8 @@ G           move to last line in file
 Shift+]     move down a block
 Shift+[     move up a block
 Ctrl+o      move to previous jump point
+''          move to previous jump point
+Ctrl+d      shift back one indent
 zz          move current line to center of screen
 zt          move current line to top of screen
 zb          move current line to bottom of screen
@@ -105,6 +107,11 @@ Ctrl+x+Ctrl+s   autocomplete with dictionary entry
 Ctrl+x+Ctrl+l   autocomplete entire line
 Ctrl+x+Ctrl+f   autocomplete filename
 Ctrl+x+Ctrl+o   omni-completion
+
+Supertab:
+Tab             autocomplete when turned on
+\Tab            toggle
+\Space          autocomplete when Supertab turned off
 
 Editing (Replace mode):
 r{char}     replace current char with {char}
@@ -171,6 +178,9 @@ Ctrl+r+=                initiate command line mode (expression evaluator)
 :{range}normal{cmd}     execute normal mode {cmd} on range
 :{range}s/{pattern}/{replacement}/{options}
                         subsitute over a given range with various options
+:{range}/{search_pattern}/s/{pattern}/{replacement}/{options}
+                        on each line that matches search_pattern, replace
+                        pattern with replacement
 :{range}global/{pattern}/{cmd}
                         execute an Ex {cmd} on all lines matching pattern
 :noh                    no highlights (after searching)
@@ -355,7 +365,7 @@ compiler nodelint
 
 RIDCULOUSLY ADVANCED (and probably useless):
 ===============================================================================
-Tab management (Normal, Command modes; this done better by tmux):
+Tab management (Normal, Command modes):
 Ctrl+T          move active window to its own tab
 {n}gt           move to tab {n}
 gt              move to next tab
@@ -374,7 +384,7 @@ zj              next fold
 zo              opens fold at cursor
 zO              opens all folds at cursor
 zm              increases fold level by one
-zM              colses all open folds
+zM              closes all open folds
 zr              decreases fold level by one
 zR              opens all folds (decreases fold level to 0)
 zd              deletes the fold at the cursor

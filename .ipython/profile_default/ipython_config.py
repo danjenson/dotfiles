@@ -1,19 +1,22 @@
 c = get_config()
 
-c.TerminalIPythonApp.display_banner = True
+c.TerminalIPythonApp.display_banner = False
 c.InteractiveShellApp.log_level = 20
 c.InteractiveShellApp.extensions = []
 c.InteractiveShellApp.exec_lines = [
             '%load_ext autoreload',
             '%autoreload 1',
             '%pdb',
+            'import os',
+            'import sys',
+            'import json',
             'import pickle',
             'import numpy as np',
             'import pandas as pd',
             'import scipy as sp'
                 ]
 c.InteractiveShellApp.exec_files = [
-        '/home/danj/.ipython/profile_default/trace.py'
+        '/home/danj/.ipython/profile_default/misc_functions.py'
         ]
 c.InteractiveShell.autoindent = True
 c.InteractiveShell.colors = 'LightBG'

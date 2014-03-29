@@ -172,6 +172,7 @@ alias cp="cp -i"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
+alias ls='ls -F'
 alias ll="ls -alrtF --color"
 alias la="ls -A"
 alias l="ls -CF"
@@ -215,6 +216,10 @@ if [ -s ~/.nvm/nvm.sh ]; then
     nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
 fi
 
+# 2.8) history modifications
+# Erase any previous duplicates in history
+export HISTCONTROL=erasedups
+
 ## ------------------------------
 ## -- 3) User-customized code  --
 ## ------------------------------
@@ -240,6 +245,35 @@ PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 if [ -f $HOME/.git-completion.bash ]; then
     source $HOME/.git-completion.bash
 fi
+
+# Custom functions
+function cda  # cd add
+{
+    if [ -f ~/.quick_dirs ]
+    then echo $PWD >> ~/.quick_dirs
+    else echo $PWD > ~/.quick_dirs
+    fi
+    echo $PWD added to ~/.quick_dirs
+}
+
+function cdv  # cd view
+{
+    vim ~/.quick_dirs
+}
+
+function cdd  # cd to quick dirs
+{
+    PS3='directory: '
+    IFS=$'\r\n'
+    dirs=($(cat ~/.quick_dirs))
+    select dir in "${dirs[@]}" quit
+        do
+            case $dir in
+                quit) break;;
+                *) cd $dir && break;;
+            esac
+        done
+}
 
 # Additional Aliases
 alias ta='tmux a -t'
