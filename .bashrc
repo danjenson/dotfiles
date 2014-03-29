@@ -230,6 +230,7 @@ stty erase 
 if [ -f ~/.git-prompt.sh ]; then
     source ~/.git-prompt.sh
 fi
+
 PS1='\[\e[0;35m\][\h] \w$(__git_ps1) $ \[\e[m\]'
 
 # Source tmuxinator
