@@ -38,6 +38,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # CLI editing
+export EDITOR=vim
 setopt noclobber
 setopt correct
 bindkey -v
@@ -45,23 +46,20 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^r' history-incremental-search-backward
 
-# Functions
-path () {
-    echo $PATH | tr ':' '\n'
-}
-
-ppath () {
-    echo $PYTHONPATH | tr ':' '\n'
-}
-
-la () {
-    ls -a | egrep '^\.' | column
-}
-
 # Safety
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
+
+# Functions
+trpath () { echo $1 | tr ':' '\n'; }
+path () { trpath $PATH; }
+ppath () { trpath $PYTHONPATH; }
+cpath () { trpath $CDPATH; }
+tls () { tmux list-sessions; }
+ta () { tmux attach -t $1; }
+zrc () { vim ~/.zshrc; }
+sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
 
 # Aliases
 alias ..='cd ..'
@@ -69,8 +67,4 @@ alias cl='clear'
 alias ll='ls -lh'
 alias m='less'
 alias v='vim'
-alias sz='source ~/.zshrc && echo .zshrc REFRESHED!'
-alias ta='tmux attach'
-alias tls='tmux list'
-alias zrc='vim ~/.zshrc'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
