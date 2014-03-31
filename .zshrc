@@ -32,10 +32,16 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# Editing
+# CLI editing
 setopt noclobber
 setopt correct
 bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^r' history-incremental-search-backward
+
+# Add current directory to PATH
+export PATH=$PATH:.  # NEVER DO THIS AS ROOT
 
 # Safety
 alias rm='rm -i'
@@ -47,8 +53,9 @@ alias ..='cd ..'
 alias cl='clear'
 alias ll='ls -lh'
 alias m='less'
+alias v='vim'
 alias sz='source ~/.zshrc && echo .zshrc REFRESHED!'
 alias ta='tmux attach'
 alias tls='tmux list'
 alias zrc='vim ~/.zshrc'
-alias -s c,h,html,css,js,php,py,sql=vim
+alias -s c,h,sh,html,css,js,php,py,sql=vim
