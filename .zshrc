@@ -1,3 +1,8 @@
+# Source local
+if [ -f $HOME/.zshrc_local ]; then
+    source $HOME/.zshrc_local
+fi
+
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
@@ -69,8 +74,3 @@ alias ta='tmux attach'
 alias tls='tmux list'
 alias zrc='vim ~/.zshrc'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
-
-# Source local
-if [ -f /$HOME/.zshrc_local ]; then
-    source /$HOME/.zshrc_local
-fi
