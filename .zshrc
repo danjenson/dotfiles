@@ -49,6 +49,10 @@ ppath () {
     echo $PYTHONPATH | tr ':' '\n'
 }
 
+la () {
+    ls -a | egrep '^\.' | column
+}
+
 # Safety
 alias rm='rm -i'
 alias mv='mv -i'
