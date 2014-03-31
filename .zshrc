@@ -40,15 +40,21 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^r' history-incremental-search-backward
 
-# Add current directory to PATH
-export PATH=$PATH:.  # NEVER DO THIS AS ROOT
+# Functions
+path () {
+    echo $PATH | tr ':' '\n'
+}
+
+ppath () {
+    echo $PYTHONPATH | tr ':' '\n'
+}
 
 # Safety
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
-# aliases
+# Aliases
 alias ..='cd ..'
 alias cl='clear'
 alias ll='ls -lh'
@@ -59,3 +65,8 @@ alias ta='tmux attach'
 alias tls='tmux list'
 alias zrc='vim ~/.zshrc'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
+
+# Source local
+if [ -f /$HOME/.zshrc_local ]; then
+    source /$HOME/.zshrc_local
+fi
