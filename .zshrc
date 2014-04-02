@@ -61,6 +61,7 @@ cpath () { trpath $CDPATH; }
 zrc () { vim ~/.zshrc; }
 sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
 tls () { tmux list-sessions; }
+tn () { tmux new -s $1; }
 ta () {
     SESSIONS=($(tmux list-sessions | cut -d: -f1))
     if [ "${#SESSIONS[@]}" -eq 0 ]; then
