@@ -39,6 +39,8 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # CLI editing
 export EDITOR=vim
+export VISUAL=vim
+setopt ignoreeof
 setopt noclobber
 setopt correct
 bindkey -v
@@ -56,10 +58,36 @@ trpath () { echo $1 | tr ':' '\n'; }
 path () { trpath $PATH; }
 ppath () { trpath $PYTHONPATH; }
 cpath () { trpath $CDPATH; }
-tls () { tmux list-sessions; }
-ta () { tmux attach -t $1; }
 zrc () { vim ~/.zshrc; }
 sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
+tls () { tmux list-sessions; }
+ta () {
+    SESSIONS=($(tmux list-sessions | cut -d: -f1))
+    if [ "${#SESSIONS[@]}" -eq 0 ]; then
+        echo 'No tmux sessions currently running.'
+    elif [ "${#SESSIONS[@]}" -eq 1 ]; then
+        tmux attach -t ${SESSIONS[1]}
+    else
+        COUNT=0
+        for SESSION in ${SESSIONS[@]} cancel
+        do
+            ((COUNT++))
+            echo "$COUNT) $SESSION"
+        done
+        SELECTION=0
+        echo -n -e '\nSELECTION: '
+        read SELECTION
+        while [ $SELECTION -lt 1 -o $SELECTION -gt $COUNT ]
+        do
+            echo '\nInvalid selection!'
+            echo -n -e '\nSELECTION: '
+            read SELECTION
+        done
+        if [ $SELECTION -eq $COUNT ]; then return; fi
+        tmux attach -t ${SESSIONS[$((SELECTION))]}
+        # arrays are zero indexed
+    fi
+}
 
 # Aliases
 alias ..='cd ..'
