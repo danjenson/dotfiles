@@ -37,6 +37,25 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+# Git prompt
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+RPROMPT=$'$(vcs_info_wrapper)'
+
 # CLI editing
 export EDITOR=vim
 export VISUAL=vim
@@ -80,13 +99,12 @@ ta () {
         read SELECTION
         while [ $SELECTION -lt 1 -o $SELECTION -gt $COUNT ]
         do
-            echo '\nInvalid selection!'
-            echo -n -e '\nSELECTION: '
+            echo -n -e '\nInvalid selection; try again: '
             read SELECTION
         done
         if [ $SELECTION -eq $COUNT ]; then return; fi
+        # The last $COUNT is for 'cancel'
         tmux attach -t ${SESSIONS[$((SELECTION))]}
-        # arrays are zero indexed
     fi
 }
 
@@ -94,6 +112,7 @@ ta () {
 alias ..='cd ..'
 alias cl='clear'
 alias ll='ls -lh'
+alias lt='ls -t'
 alias m='less'
 alias v='vim'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
