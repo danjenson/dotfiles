@@ -56,6 +56,10 @@ set autoindent "Autoindents after returen
 set tags=tags;/
 set colorcolumn=81 "To help from going over 80 char limit
 
+" File-specific indentation
+autocmd BufRead, BufNewFile *.py, *.c, *.h set ts=2 sts=2 sw=2
+autocmd BufRead, BufNewFile *.ruby set ts=2 sts=2 sw=2
+
 " make split windows easier to navigate
 map <C-j> <C-w>j
 map <C-k> <C-w>k
