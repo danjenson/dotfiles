@@ -23,7 +23,6 @@ compinit
 if whence dircolors >/dev/null; then
   eval "$(dircolors -b)"
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-  alias ls='ls --color'
 else
   export CLICOLOR=1
   zstyle ':completion:*:default' list-colors ''
@@ -119,8 +118,8 @@ ta () {
 # Aliases
 alias ..='cd ..'
 alias cl='clear'
+alias ls='ls --color -pt'
 alias ll='ls -lh'
-alias lt='ls -t'
 alias m='less'
 alias v='vim'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
