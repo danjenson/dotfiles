@@ -89,29 +89,33 @@ sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
 tls () { tmux list-sessions; }
 tn () { tmux new -s $1; }
 ta () {
-    SESSIONS=($(tmux list-sessions | cut -d: -f1))
-    if [ "${#SESSIONS[@]}" -eq 0 ]; then
-        echo 'No tmux sessions currently running.'
-    elif [ "${#SESSIONS[@]}" -eq 1 ]; then
-        tmux attach -t ${SESSIONS[1]}
+    if [ "$1" ]; then
+        tmux attach -t $1
     else
-        COUNT=0
-        for SESSION in ${SESSIONS[@]} cancel
-        do
-            ((COUNT++))
-            echo "$COUNT) $SESSION"
-        done
-        SELECTION=0
-        echo -n -e '\nSELECTION: '
-        read SELECTION
-        while [ $SELECTION -lt 1 -o $SELECTION -gt $COUNT ]
-        do
-            echo -n -e '\nInvalid selection; try again: '
+        SESSIONS=($(tmux list-sessions | cut -d: -f1))
+        if [ "${#SESSIONS[@]}" -eq 0 ]; then
+            echo 'No tmux sessions currently running.'
+        elif [ "${#SESSIONS[@]}" -eq 1 ]; then
+            tmux attach -t ${SESSIONS[1]}
+        else
+            COUNT=0
+            for SESSION in ${SESSIONS[@]} cancel
+            do
+                ((COUNT++))
+                echo "$COUNT) $SESSION"
+            done
+            SELECTION=0
+            echo -n -e '\nSELECTION: '
             read SELECTION
-        done
-        if [ $SELECTION -eq $COUNT ]; then return; fi
-        # The last $COUNT is for 'cancel'
-        tmux attach -t ${SESSIONS[$((SELECTION))]}
+            while [ $SELECTION -lt 1 -o $SELECTION -gt $COUNT ]
+            do
+                echo -n -e '\nInvalid selection; try again: '
+                read SELECTION
+            done
+            if [ $SELECTION -eq $COUNT ]; then return; fi
+            # The last $COUNT is for 'cancel'
+            tmux attach -t ${SESSIONS[$((SELECTION))]}
+        fi
     fi
 }
 
@@ -123,3 +127,5 @@ alias ll='ls -lh'
 alias m='less'
 alias v='vim'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

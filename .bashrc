@@ -282,3 +282,5 @@ alias sb='source ~/.bashrc && echo ".bashrc REFRESHED!"'
 alias brc='vim ~/.bashrc'
 alias ipy='ipython'
 alias nbk='ipython notebook --pylab inline'
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
