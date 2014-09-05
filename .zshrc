@@ -122,7 +122,7 @@ ta () {
 # Aliases
 alias ..='cd ..'
 alias cl='clear'
-alias ls='ls --color -pt'
+alias ls='ls -G -pt'
 alias ll='ls -lh'
 alias m='less'
 alias v='vim'
