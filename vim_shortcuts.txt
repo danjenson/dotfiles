@@ -370,8 +370,10 @@ Ctrl+T          move active window to its own tab
 {n}gt           move to tab {n}
 gt              move to next tab
 gT              move to previous tab
+:Te             open new tab Explore
 :tabe {file}    open {file} in new vim tab
 :tabc           close current tab
+:tabf {file}    open new tab with find {file}
 :tabo           keep only current tab
 :tabn           move to next tab
 :tabp           move to previous tab
