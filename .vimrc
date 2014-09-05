@@ -1,8 +1,3 @@
-" Source .vimfb if exists
-if filereadable(glob("~/.vimrc_local"))
-    source ~/.vimrc_local
-endif
-
 " Plugins
 syntax on
 filetype indent plugin on
@@ -53,7 +48,8 @@ set showmatch "Flashes matching paren when one is typed
 set showmode "Show editing mode in status (-- INSERT --)
 set ruler "Show cursor position
 set autoindent "Autoindents after returen
-set tags=tags;/
+set tags=./tags;/ "Looks for tags in the pwd of the current file; stops at root
+set path=$PWD/** "Searches PWD and down
 set colorcolumn=81 "To help from going over 80 char limit
 
 " File-specific indentation
@@ -125,3 +121,8 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
+
+" Source .vimrc_local if exists
+if filereadable(glob("~/.vimrc_local"))
+    source ~/.vimrc_local
+endif
