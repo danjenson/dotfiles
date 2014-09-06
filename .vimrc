@@ -49,12 +49,15 @@ set showmode "Show editing mode in status (-- INSERT --)
 set ruler "Show cursor position
 set autoindent "Autoindents after returen
 set tags=./tags;/ "Looks for tags in the pwd of the current file; stops at root
-set path=$PWD/** "Searches PWD and down
+set path+=** "Searches directories recursively
 set colorcolumn=81 "To help from going over 80 char limit
 
 " File-specific indentation
 autocmd BufRead, BufNewFile *.py, *.c, *.h set ts=2 sts=2 sw=2
 autocmd BufRead, BufNewFile *.ruby set ts=2 sts=2 sw=2
+
+" Command that listen for events
+autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
 " make split windows easier to navigate
 map <C-j> <C-w>j
@@ -64,9 +67,6 @@ map <C-l> <C-w>l
 map <C-m> <C-w>_
 nmap \| <C-w>v
 nmap <C-_> <C-w>s
-
-" Command that listen for events
-autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
 " Custom functions
 " Make pdf using latex
