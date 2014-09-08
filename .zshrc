@@ -80,6 +80,14 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # Functions
+topc () { ps aux \
+          | awk '{print $2, $3, $4, $11}' \
+          | sort -k3rn \
+          | head -n ${1:-10} \
+          | awk 'BEGIN { print "\nPID\tCPU %\tMEM %\tPROCESS" }
+                 { printf "%s\t%s\t%s\t%s\n", $1, $2, $3, $4 }
+                 END {printf "\n"}'
+}
 trpath () { echo $1 | tr ':' '\n'; }
 path () { trpath $PATH; }
 ppath () { trpath $PYTHONPATH; }
