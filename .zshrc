@@ -87,7 +87,7 @@ cpath () { trpath $CDPATH; }
 zrc () { vim ~/.zshrc; }
 sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
 tls () { tmux list-sessions; }
-tn () { tmux new -s $1; }
+tn () { tmux new -s $1 -n main; }
 ta () {
     if [ "$1" ]; then
         tmux attach -t $1
