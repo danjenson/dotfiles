@@ -130,10 +130,14 @@ ta () {
 # Aliases
 alias ..='cd ..'
 alias cl='clear'
-alias ls='ls --color -pt'
 alias ll='ls -lh'
 alias m='less'
 alias v='vim'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
+if [[ $(uname) == 'Darwin' ]]; then
+  alias ls='ls -G -pt'
+else
+  alias ls='ls --color -pt'
+fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
