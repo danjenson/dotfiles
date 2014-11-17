@@ -1,3 +1,5 @@
+import os
+
 c = get_config()
 
 c.TerminalIPythonApp.display_banner = False
@@ -20,7 +22,7 @@ c.InteractiveShellApp.exec_lines = [
             'from pprint import pprint as pp'
                 ]
 c.InteractiveShellApp.exec_files = [
-        'misc_ipython_functions.py'
+        os.path.expanduser('~/.ipython/profile_default/misc_ipython_functions.py')
         ]
 c.InteractiveShell.autoindent = True
 c.InteractiveShell.colors = 'LightBG'
