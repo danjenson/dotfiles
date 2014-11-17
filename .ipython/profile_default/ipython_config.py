@@ -11,12 +11,16 @@ c.InteractiveShellApp.exec_lines = [
             'import sys',
             'import json',
             'import pickle',
+            'import datetime as dt',
+            'import itertools as it',
+            'import operator as op',
             'import numpy as np',
             'import pandas as pd',
-            'import scipy as sp'
+            'import scipy as sp',
+            'from pprint import pprint as pp'
                 ]
 c.InteractiveShellApp.exec_files = [
-        '/home/danj/.ipython/profile_default/misc_ipython_functions.py'
+        'misc_ipython_functions.py'
         ]
 c.InteractiveShell.autoindent = True
 c.InteractiveShell.colors = 'LightBG'
