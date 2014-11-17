@@ -8,7 +8,6 @@ c.InteractiveShellApp.extensions = []
 c.InteractiveShellApp.exec_lines = [
             '%load_ext autoreload',
             '%autoreload 1',
-            '%pdb',
             'import os',
             'import sys',
             'import json',
