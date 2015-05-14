@@ -122,6 +122,10 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
+" Compilation options
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
 " Source .vimrc_local if exists
 if filereadable(glob("~/.vimrc_local"))
     source ~/.vimrc_local

@@ -126,6 +126,11 @@ ta () {
         fi
     fi
 }
+cpp () {
+    name=$1
+    fname=${name}.cpp
+    clang++ $fname -o $name -std='c++11' -stdlib='libc++'
+}
 
 # Aliases
 alias ..='cd ..'
@@ -139,5 +144,3 @@ if [[ $(uname) == 'Darwin' ]]; then
 else
   alias ls='ls --color -pt'
 fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
