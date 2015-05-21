@@ -1,3 +1,5 @@
+" encoding
+set encoding=utf-8
 " Plugins
 syntax on
 filetype indent plugin on
