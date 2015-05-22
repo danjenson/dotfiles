@@ -1,8 +1,3 @@
-# Source local
-if [ -f $HOME/.zshrc_local ]; then
-    source $HOME/.zshrc_local
-fi
-
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
@@ -140,4 +135,7 @@ else
   alias ls='ls --color -pt'
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Source local
+if [ -f $HOME/.zshrc_local ]; then
+    source $HOME/.zshrc_local
+fi

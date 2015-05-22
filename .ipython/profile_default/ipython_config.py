@@ -15,6 +15,7 @@ c.InteractiveShellApp.exec_lines = [
             'import datetime as dt',
             'import itertools as it',
             'import operator as op',
+            'import multiprocessing as mp',
             'import numpy as np',
             'import pandas as pd',
             'import scipy as sp',
