@@ -121,6 +121,11 @@ ta () {
         fi
     fi
 }
+cpp () {
+    name=$1
+    fname=${name}.cpp
+    clang++ $fname -o $name -std='c++11' -stdlib='libc++'
+}
 
 # Aliases
 alias ..='cd ..'

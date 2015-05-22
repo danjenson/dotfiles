@@ -1,3 +1,5 @@
+" encoding
+set encoding=utf-8
 " Plugins
 syntax on
 filetype indent plugin on
@@ -121,6 +123,10 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
+
+" Compilation options
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " Source .vimrc_local if exists
 if filereadable(glob("~/.vimrc_local"))
