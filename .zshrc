@@ -80,13 +80,15 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # Functions
-topc () { ps aux \
-          | awk '{print $2, $3, $4, $11}' \
-          | sort -k3rn \
-          | head -n ${1:-10} \
-          | awk 'BEGIN { print "\nPID\tCPU %\tMEM %\tPROCESS" }
-                 { printf "%s\t%s\t%s\t%s\n", $1, $2, $3, $4 }
-                 END {printf "\n"}'
+topc ()
+{
+    ps aux \
+        | awk '{print $2, $3, $4, $11}' \
+        | sort -k3rn \
+        | head -n ${1:-10} \
+        | awk 'BEGIN { print "\nPID\tCPU %\tMEM %\tPROCESS" }
+               { printf "%s\t%s\t%s\t%s\n", $1, $2, $3, $4 }
+               END {printf "\n"}'
 }
 trpath () { echo $1 | tr ':' '\n'; }
 path () { trpath $PATH; }
@@ -96,7 +98,8 @@ zrc () { vim ~/.zshrc; }
 sz () { source ~/.zshrc && echo '.zshrc REFRESHED!'; }
 tls () { tmux list-sessions; }
 tn () { tmux new -s $1 -n main; }
-ta () {
+ta ()
+{
     if [ "$1" ]; then
         tmux attach -t $1
     else
@@ -125,11 +128,6 @@ ta () {
             tmux attach -t ${SESSIONS[$((SELECTION))]}
         fi
     fi
-}
-cpp () {
-    name=$1
-    fname=${name}.cpp
-    clang++ $fname -o $name -std='c++11' -stdlib='libc++'
 }
 
 # Aliases
