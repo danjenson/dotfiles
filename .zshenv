@@ -4,8 +4,8 @@
 cpp ()
 {
     name=$1
-    fname=${name}.cpp
-    clang++ $fname -o $name -std='c++11' -stdlib='libc++'
+    mkdir -p out
+    clang++ $name -o out/${name:r} -std='c++11' -stdlib='libc++'
 }
 
 # Source local
