@@ -1,4 +1,4 @@
-REQUIRED BACKGROUND:
+this sucksREQUIRED BACKGROUND:
 ===============================================================================
 run `vimtutor` from command line.
 
