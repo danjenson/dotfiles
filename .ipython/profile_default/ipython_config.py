@@ -18,6 +18,7 @@ c.InteractiveShellApp.exec_lines = [
             'import multiprocessing as mp',
             'import numpy as np',
             'import pandas as pd',
+            'import sklearn as sk',
             'import scipy as sp',
             'import nltk',
             'from pprint import pprint as pp'
