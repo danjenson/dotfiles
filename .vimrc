@@ -1,36 +1,32 @@
-" encoding
-set encoding=utf-8
-" Plugins
-syntax on
-filetype indent plugin on
-" Install this from github for easy plugins
-if filereadable(glob("~/.vim/autoload/pathogen.vim"))
-    execute pathogen#infect() 
-endif
+" VIM MASTER
 
-" Toggle supertab with \<tab> (<leader><tab>)
-let SuperTabMappingForward = '<leader><space>'
-let g:SuperTab_tab = 0
-function! ToggleSuperTabMap()
-  if g:SuperTab_tab == 1
-      let g:SuperTabMappingForward = "<leader><space>"
+set nocompatible " be iMproved, require this
+filetype off
 
-      let g:SuperTabMappingTabLiteral = "<tab>"
-      so ~/.vim/plugin/supertab.vim
-      let g:SuperTab_tab = 0
-      echo "SuperTab key = <leader><space>"
-  else
-      let g:SuperTabMappingForward = "<tab>"
-      let g:SuperTabMappingTabLiteral = "<leader><space>"
-      so ~/.vim/plugin/supertab.vim
-      let g:SuperTab_tab = 1
-      echo "SuperTab key = <tab>"
-  endif
-endfunction
-map <leader><tab> :call ToggleSuperTabMap()<CR>
-imap <leader><tab> <esc>:call ToggleSuperTabMap()<CR>a
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" put plugins here, run :PluginInstall to install
+Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-commentary'
+Plugin 'Valloric/YouCompleteMe'
+
+" NOTE: to install YouCompleteMe
+" cd ~/.vim/bundle
+" git clone git@github.com:Valloric/YouCompleteMe.git
+" cd YouCompleteMe
+" git submodule update --init --recursive
+" dnf/apt-get/brew install cmake gcc-c++ python-libs python-devel
+" ./install.sh
+
+call vundle#end()           " required
+filetype plugin indent on   "required
 
 " Setters
+set encoding=utf-8
 set incsearch "Set search previewing
 set hlsearch "Highlight search items
 set cursorline "Add cursorline to view
@@ -69,64 +65,6 @@ map <C-l> <C-w>l
 map <C-m> <C-w>_
 nmap \| <C-w>v
 nmap <C-_> <C-w>s
-
-" Custom functions
-" Make pdf using latex
-command! Ltx call Ltx()
-function Ltx()
-    execute ':w | !pdflatex %'
-endfunction
-
-" Shorten syntastic check
-command! Chk call Chk()
-function Chk()
-    execute ':SyntasticCheck'
-endfunction
-
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
-function! Stab()
-  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-  if l:tabstop > 0
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
-  call SummarizeTabs()
-endfunction
-  
-function! SummarizeTabs()
-  try
-    echohl ModeMsg
-    echon 'tabstop='.&l:ts
-    echon ' shiftwidth='.&l:sw
-    echon ' softtabstop='.&l:sts
-    if &l:et
-      echon ' expandtab'
-    else
-      echon ' noexpandtab'
-    endif
-  finally
-    echohl None
-  endtry
-endfunction
-
-" Strip trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-" Compilation options
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " Source .vimrc_local if exists
 if filereadable(glob("~/.vimrc_local"))
