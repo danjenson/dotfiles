@@ -1,10 +1,12 @@
 " VIM MASTER
 
-set nocompatible " be iMproved, require this
-filetype off
+syntax on                   " syntax highlighting
+set nocompatible            " be iMproved, require this
+set backspace=2             " vim 7.4 fix
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+filetype off
 call vundle#begin()
 
 " put plugins here, run :PluginInstall to install
@@ -23,7 +25,7 @@ Plugin 'Valloric/YouCompleteMe'
 " ./install.sh
 
 call vundle#end()           " required
-filetype plugin indent on   "required
+filetype plugin indent on   " required
 
 " Setters
 set encoding=utf-8
@@ -53,9 +55,6 @@ set colorcolumn=81 "To help from going over 80 char limit
 " File-specific indentation
 autocmd BufRead, BufNewFile *.py, *.c, *.h set ts=2 sts=2 sw=2
 autocmd BufRead, BufNewFile *.ruby set ts=2 sts=2 sw=2
-
-" Command that listen for events
-autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
 " make split windows easier to navigate
 map <C-j> <C-w>j
