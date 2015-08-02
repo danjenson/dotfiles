@@ -1,4 +1,6 @@
 [user]
 	name = Dan Jenson
 	email = daniel.a.jenson@gmail.com
-[http]
+
+[core]
+	excludesfile = ~/.gitignore_global
