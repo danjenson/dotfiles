@@ -1,6 +1,7 @@
 # example user config (see "hg help config" for more info)
 [ui]
 username = Daniel Jenson <daniel.a.jenson@gmail.com>
+ignore = ~/.hgignore_global
 
 [extensions]
 # uncomment these lines to enable some popular extensions
