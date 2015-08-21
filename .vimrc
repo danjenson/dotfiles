@@ -19,7 +19,6 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'delimitMate.vim'
-Plugin 'klen/python-mode'
 
 " NOTE: to install YouCompleteMe
 " cd ~/.vim/bundle
