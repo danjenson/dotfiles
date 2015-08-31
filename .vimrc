@@ -18,9 +18,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'delimitMate.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'gerw/vim-latex-suite'
 
+Plugin 'Valloric/YouCompleteMe'
 " NOTE: to install YouCompleteMe
 " cd ~/.vim/bundle
 " git clone git@github.com:Valloric/YouCompleteMe.git
