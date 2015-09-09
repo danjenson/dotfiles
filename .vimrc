@@ -17,9 +17,10 @@ Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'delimitMate.vim'
+Plugin 'gerw/vim-latex-suite'
 
+Plugin 'Valloric/YouCompleteMe'
 " NOTE: to install YouCompleteMe
 " cd ~/.vim/bundle
 " git clone git@github.com:Valloric/YouCompleteMe.git
