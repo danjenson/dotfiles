@@ -2,3 +2,4 @@ syntax: glob
 out/*
 *.pyc
 *.o
+*__pycache__*
