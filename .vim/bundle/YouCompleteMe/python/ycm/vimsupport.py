@@ -21,6 +21,7 @@ import vim
 import os
 import tempfile
 import json
+import re
 from ycmd.utils import ToUtf8IfNeeded
 from ycmd import user_options_store
 
@@ -60,14 +61,20 @@ def TextAfterCursor():
   return vim.current.line[ CurrentColumn(): ]
 
 
+def TextBeforeCursor():
+  """Returns the text before CurrentColumn."""
+  return vim.current.line[ :CurrentColumn() ]
+
+
 # Expects version_string in 'MAJOR.MINOR.PATCH' format, e.g. '7.4.301'
 def VimVersionAtLeast( version_string ):
   major, minor, patch = [ int( x ) for x in version_string.split( '.' ) ]
 
   # For Vim 7.4.301, v:version is '704'
   actual_major_and_minor = GetIntValue( 'v:version' )
-  if actual_major_and_minor != major * 100 + minor:
-    return False
+  matching_major_and_minor = major * 100 + minor
+  if actual_major_and_minor != matching_major_and_minor:
+    return actual_major_and_minor > matching_major_and_minor
 
   return GetBoolValue( 'has("patch{0}")'.format( patch ) )
 
@@ -245,11 +252,15 @@ def ConvertDiagnosticsToQfList( diagnostics ):
     if line_num < 1:
       line_num = 1
 
+    text = diagnostic[ 'text' ]
+    if diagnostic.get( 'fixit_available', False ):
+      text += ' (FixIt available)'
+
     return {
       'bufnr' : GetBufferNumberForFilename( location[ 'filepath' ] ),
       'lnum'  : line_num,
       'col'   : location[ 'column_num' ],
-      'text'  : ToUtf8IfNeeded( diagnostic[ 'text' ] ),
+      'text'  : ToUtf8IfNeeded( text ),
       'type'  : diagnostic[ 'kind' ][ 0 ],
       'valid' : 1
     }
@@ -443,6 +454,14 @@ def FiletypesForBuffer( buffer_object ):
   return GetBufferOption( buffer_object, 'ft' ).split( '.' )
 
 
+def VariableExists( variable ):
+  return GetBoolValue( "exists( '{0}' )".format( EscapeForVim( variable ) ) )
+
+
+def SetVariableValue( variable, value ):
+  vim.command( "let {0} = '{1}'".format( variable, EscapeForVim( value ) ) )
+
+
 def GetVariableValue( variable ):
   return vim.eval( variable )
 
@@ -454,3 +473,105 @@ def GetBoolValue( variable ):
 def GetIntValue( variable ):
   return int( vim.eval( variable ) )
 
+
+def ReplaceChunksList( chunks, vim_buffer = None ):
+  if vim_buffer is None:
+    vim_buffer = vim.current.buffer
+
+  # We need to track the difference in length, but ensuring we apply fixes
+  # in ascending order of insertion point.
+  chunks.sort( key = lambda chunk: (
+    chunk[ 'range' ][ 'start' ][ 'line_num' ],
+    chunk[ 'range' ][ 'start' ][ 'column_num' ]
+  ) )
+
+  # Remember the line number we're processing. Negative line number means we
+  # haven't processed any lines yet (by nature of being not equal to any
+  # real line number).
+  last_line = -1
+
+  line_delta = 0
+  for chunk in chunks:
+    if chunk[ 'range' ][ 'start' ][ 'line_num' ] != last_line:
+      # If this chunk is on a different line than the previous chunk,
+      # then ignore previous deltas (as offsets won't have changed).
+      last_line = chunk[ 'range' ][ 'end' ][ 'line_num' ]
+      char_delta = 0
+
+    ( new_line_delta, new_char_delta ) = ReplaceChunk(
+      chunk[ 'range' ][ 'start' ],
+      chunk[ 'range' ][ 'end' ],
+      chunk[ 'replacement_text' ],
+      line_delta, char_delta,
+      vim_buffer )
+    line_delta += new_line_delta
+    char_delta += new_char_delta
+
+
+# Replace the chunk of text specified by a contiguous range with the supplied
+# text.
+# * start and end are objects with line_num and column_num properties
+# * the range is inclusive
+# * indices are all 1-based
+# * the returned character delta is the delta for the last line
+#
+# returns the delta (in lines and characters) that any position after the end
+# needs to be adjusted by.
+def ReplaceChunk( start, end, replacement_text, line_delta, char_delta,
+                  vim_buffer ):
+  # ycmd's results are all 1-based, but vim's/python's are all 0-based
+  # (so we do -1 on all of the values)
+  start_line = start[ 'line_num' ] - 1 + line_delta
+  end_line = end[ 'line_num' ] - 1 + line_delta
+  source_lines_count = end_line - start_line + 1
+  start_column = start[ 'column_num' ] - 1 + char_delta
+  end_column = end[ 'column_num' ] - 1
+  if source_lines_count == 1:
+    end_column += char_delta
+
+  replacement_lines = replacement_text.splitlines( False )
+  if not replacement_lines:
+    replacement_lines = [ '' ]
+  replacement_lines_count = len( replacement_lines )
+
+  end_existing_text = vim_buffer[ end_line ][ end_column : ]
+  start_existing_text = vim_buffer[ start_line ][ : start_column ]
+
+  new_char_delta = ( len( replacement_lines[ -1 ] )
+                     - ( end_column - start_column ) )
+  if replacement_lines_count > 1:
+    new_char_delta -= start_column
+
+  replacement_lines[ 0 ] = start_existing_text + replacement_lines[ 0 ]
+  replacement_lines[ -1 ] = replacement_lines[ -1 ] + end_existing_text
+
+  vim_buffer[ start_line : end_line + 1 ] = replacement_lines[:]
+
+  new_line_delta = replacement_lines_count - source_lines_count
+  return ( new_line_delta, new_char_delta )
+
+
+def InsertNamespace( namespace ):
+  if VariableExists( 'g:ycm_csharp_insert_namespace_expr' ):
+    expr = GetVariableValue( 'g:ycm_csharp_insert_namespace_expr' )
+    if expr:
+      SetVariableValue( "g:ycm_namespace_to_insert", namespace )
+      vim.eval( expr )
+      return
+
+  pattern = '^\s*using\(\s\+[a-zA-Z0-9]\+\s\+=\)\?\s\+[a-zA-Z0-9.]\+\s*;\s*'
+  line = SearchInCurrentBuffer( pattern )
+  existing_line = LineTextInCurrentBuffer( line )
+  existing_indent = re.sub( r"\S.*", "", existing_line )
+  new_line = "{0}using {1};\n\n".format( existing_indent, namespace )
+  replace_pos = { 'line_num': line + 1, 'column_num': 1 }
+  ReplaceChunk( replace_pos, replace_pos, new_line, 0, 0 )
+  PostVimMessage( "Add namespace: {0}".format( namespace ) )
+
+
+def SearchInCurrentBuffer( pattern ):
+  return GetIntValue( "search('{0}', 'Wcnb')".format( EscapeForVim( pattern )))
+
+
+def LineTextInCurrentBuffer( line ):
+  return vim.current.buffer[ line ]
