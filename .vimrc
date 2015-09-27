@@ -71,6 +71,9 @@ map <C-m> <C-w>_
 nmap \| <C-w>v
 nmap <C-_> <C-w>s
 
+" colorscheme
+colorscheme desert
+
 " Source .vimrc_local if exists
 if filereadable(glob("~/.vimrc_local"))
     source ~/.vimrc_local
