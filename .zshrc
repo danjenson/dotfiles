@@ -131,6 +131,7 @@ alias cl='clear'
 alias ll='ls -lh'
 alias m='less'
 alias v='vim'
+alias vs='vim ~/dotfiles/vim_shortcuts.txt'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
 if [[ $(uname) == 'Darwin' ]]; then
   alias ls='ls -G -pt'
