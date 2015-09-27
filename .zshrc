@@ -75,6 +75,14 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # Functions
+cpp ()
+{
+    mkdir -p out && clang++ -std='c++11' $1 ${@:2} -o out/${1:r}
+}
+gl ()
+{
+    mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL $1 -lGL -lglut -lm -lGLU
+}
 topc ()
 {
     ps aux \
@@ -128,6 +136,7 @@ ta ()
 # Aliases
 alias ..='cd ..'
 alias cl='clear'
+alias ipy='ipython'
 alias ll='ls -lh'
 alias m='less'
 alias v='vim'
