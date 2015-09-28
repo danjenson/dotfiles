@@ -77,7 +77,7 @@ alias cp='cp -i'
 # Functions
 cpp ()
 {
-    mkdir -p out && clang++ -std='c++11' $1 ${@:2} -o out/${1:r}
+    mkdir -p out && clang++ -std='c++11' -o out/${1:r} ${@}
 }
 gl ()
 {
