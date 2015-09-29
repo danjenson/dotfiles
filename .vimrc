@@ -20,7 +20,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'delimitMate.vim'
 Plugin 'gerw/vim-latex-suite'
 
-Plugin 'Valloric/YouCompleteMe'
 " NOTE: to install YouCompleteMe
 " cd ~/.vim/bundle
 " git clone git@github.com:Valloric/YouCompleteMe.git
@@ -28,6 +27,7 @@ Plugin 'Valloric/YouCompleteMe'
 " git submodule update --init --recursive
 " dnf/apt-get/brew install cmake gcc-c++ python-libs python-devel
 " ./install.sh
+" add it to your .vimrc_local
 
 call vundle#end()           " required
 filetype plugin indent on   " required
