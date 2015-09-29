@@ -27,7 +27,7 @@ Plugin 'gerw/vim-latex-suite'
 " git submodule update --init --recursive
 " dnf/apt-get/brew install cmake gcc-c++ python-libs python-devel
 " ./install.sh
-" add it to your .vimrc_local
+" add Plugin 'Valloric/YouCompleteMe' to your .vimrc_local
 
 call vundle#end()           " required
 filetype plugin indent on   " required
