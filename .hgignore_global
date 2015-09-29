@@ -1,4 +1,7 @@
 syntax: glob
 out/*
 *.pyc
+*__pycache__*
 *.o
+*.log
+*.swp

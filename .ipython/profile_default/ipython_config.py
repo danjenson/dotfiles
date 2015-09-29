@@ -15,6 +15,7 @@ c.InteractiveShellApp.exec_lines = [
             'import datetime as dt',
             'import itertools as it',
             'import operator as op',
+            'import matplotlib.pyplot as plt',
             'import multiprocessing as mp',
             'import numpy as np',
             'import pandas as pd',
@@ -24,7 +25,8 @@ c.InteractiveShellApp.exec_lines = [
             'from pprint import pprint as pp'
                 ]
 c.InteractiveShellApp.exec_files = [
-        os.path.expanduser('~/.ipython/profile_default/misc_ipython_functions.py')
+        os.path.expanduser('~/.ipython/profile_default/misc.py'),
+        os.path.expanduser('~/.ipython/profile_default/graph.py')
         ]
 c.InteractiveShell.autoindent = True
 c.InteractiveShell.colors = 'LightBG'

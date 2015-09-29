@@ -18,8 +18,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'delimitMate.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'gerw/vim-latex-suite'
 
+Plugin 'Valloric/YouCompleteMe'
 " NOTE: to install YouCompleteMe
 " cd ~/.vim/bundle
 " git clone git@github.com:Valloric/YouCompleteMe.git
@@ -55,6 +56,7 @@ set autoindent "Autoindents after returen
 set tags=./tags;/ "Looks for tags in the pwd of the current file; stops at root
 set path+=** "Searches directories recursively
 set colorcolumn=81 "To help from going over 80 char limit
+set textwidth=80 "Automatically wrap at 80 chars
 
 " File-specific indentation
 autocmd BufRead, BufNewFile *.py, *.c, *.h set ts=2 sts=2 sw=2
@@ -68,6 +70,9 @@ map <C-l> <C-w>l
 map <C-m> <C-w>_
 nmap \| <C-w>v
 nmap <C-_> <C-w>s
+
+" colorscheme
+colorscheme desert
 
 " Source .vimrc_local if exists
 if filereadable(glob("~/.vimrc_local"))
