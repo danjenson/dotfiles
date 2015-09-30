@@ -1,8 +1,11 @@
+import matplotlib
 import matplotlib.pyplot as plt
 import itertools as it
 import numpy as np
 from fractions import Fraction
-plt.style.use('ggplot')
+
+if matplotlib.__version__ > '1.4':
+    plt.style.use('ggplot')
 
 
 def p(X, Y, title, figname,
@@ -13,7 +16,7 @@ def p(X, Y, title, figname,
       xlim=None,
       ylim=None,
       xpad=0.1,
-      ypad=0.1): 
+      ypad=0.1):
     '''plot regular X, Y'''
 
     pp([X], [Y], title, figname,
@@ -43,7 +46,7 @@ def pp(Xs, Ys, title, figname,
     _save(figname)
     _cleanup()
     return
-    
+
 
 def _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad):
     plt.clf()
