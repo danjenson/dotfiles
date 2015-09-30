@@ -21,8 +21,7 @@ c.InteractiveShellApp.exec_lines = [
             'import pandas as pd',
             'import sklearn as sk',
             'import scipy as sp',
-            'import nltk',
-            'from pprint import pprint as pp'
+            'import nltk'
                 ]
 c.InteractiveShellApp.exec_files = [
         os.path.expanduser('~/.ipython/profile_default/misc.py'),
