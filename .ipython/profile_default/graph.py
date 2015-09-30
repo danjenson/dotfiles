@@ -10,6 +10,8 @@ def p(X, Y, title, figname,
       labels=[],
       trig=False,
       trig_pi_step=Fraction(1, 4),
+      xlim=None,
+      ylim=None,
       xpad=0.1,
       ypad=0.1): 
     '''plot regular X, Y'''
@@ -30,30 +32,36 @@ def pp(Xs, Ys, title, figname,
        same_color=True,
        trig=False,
        trig_pi_step=Fraction(1, 4),
+       xlim=None,
+       ylim=None,
        xpad=0.1,
        ypad=0.1):
     '''plot piecewise Xs and Ys'''
 
-    _setup(Xs, Ys, title, trig, trig_pi_step, xpad, ypad)
+    _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad)
     _plot(Xs, Ys, holes, labels, same_color)
     _save(figname)
     _cleanup()
     return
     
 
-def _setup(Xs, Ys, title, trig, trig_pi_step, xpad, ypad):
+def _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad):
     plt.clf()
     plt.title(title)
-    X = np.concatenate(Xs)
-    Y = np.concatenate(Ys)
-    xbuff = np.fabs(X.max() - X.min()) * xpad
-    ybuff = np.fabs(Y.max() - Y.min()) * ypad
-    xmin = X.min() - xbuff
-    xmax = X.max() + xbuff
-    ymin = Y.min() - ybuff
-    ymax = Y.max() + ybuff
-    plt.xlim(xmin, xmax)
-    plt.ylim(ymin, ymax)
+    if not xlim:
+        X = np.concatenate(Xs)
+        xbuff = np.fabs(X.max() - X.min()) * xpad
+        xmin = X.min() - xbuff
+        xmax = X.max() + xbuff
+        xlim = (xmin, xmax)
+    if not ylim:
+        Y = np.concatenate(Ys)
+        ybuff = np.fabs(Y.max() - Y.min()) * ypad
+        ymin = Y.min() - ybuff
+        ymax = Y.max() + ybuff
+        ylim = (ymin, ymax)
+    plt.xlim(xlim)
+    plt.ylim(ylim)
     plt.axhline(0, color='black')
     plt.axvline(0, color='black')
     if trig:
