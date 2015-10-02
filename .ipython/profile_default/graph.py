@@ -39,7 +39,24 @@ def pp(Xs, Ys, title, figname,
     _save(figname)
     _cleanup()
     return
-    
+
+
+def ped(func, x_range, lim_x, epsilon, delta, title, figname):
+    '''plot epsilon-delta'''
+    X = np.linspace(x_range[0], x_range[1])
+    Y = np.vectorize(func)(X)
+    _setup([X], [Y], title, trig=False, trig_pi_sep=0, xpad=0, ypad=0)
+    lim_y = func(lim_x)
+    Xtop, Ytop = _hline((x_range[0], lim_x - delta), func(lim_x - delta))
+    Xbottom, Ybottom = _hline((x_range[0], lim_x + delta), func(lim_x + delta))
+    Xleft, Yleft = _vline(lim_x - delta, (0, func(lim_x - delta)))
+    Xright, Yright = _vline(lim_x + delta, (0, func(lim_x + delta)))
+    _plot([X], [Y])
+    _plot([Xtop, Xbottom, Xleft, Xright], [Ytop, Ybottom, Yleft, Yright])
+    _save(figname)
+    _cleanup()
+    return
+
 
 def _setup(Xs, Ys, title, trig, trig_pi_step, xpad, ypad):
     plt.clf()
@@ -104,7 +121,7 @@ def _trig_axis(v, pi_step):
     return ticks, labels
 
 
-def _plot(Xs, Ys, holes, labels, same_color):
+def _plot(Xs, Ys, holes=None, labels=None, same_color=True):
     # if more Y-sets than X-sets, reuse X coordinates by cycling
     if len(Ys) > len(Xs):
         Xs = it.cycle(Xs)
@@ -121,6 +138,14 @@ def _plot(Xs, Ys, holes, labels, same_color):
         plt.legend()
     return
 
+
+def _hline(x_range, y):
+    return np.linspace(x_range[0], x_range[1], 1000), np.linspace(y, y, 1000)
+
+
+def _vline(x, y_range):
+    return np.linspace(x, x, 1000), np.linspace(y_range[0], y_range[1], 1000)
+    
 
 def _save(figname):
     plt.savefig('figures/' + figname + '.pdf')
