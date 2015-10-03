@@ -8,6 +8,14 @@ if matplotlib.__version__ > '1.4':
     plt.style.use('ggplot')
 
 
+class Hole():
+    def __init__(self, x, y, filled=False, color='red'):
+        self.x = x
+        self.y = y
+        self.filled = filled
+        self.color = color
+
+
 def p(X, Y, title, figname,
       holes=[],
       labels=[],
@@ -16,8 +24,8 @@ def p(X, Y, title, figname,
       trig_pi_step=Fraction(1, 4),
       xlim=None,
       ylim=None,
-      xpad=0.0,
-      ypad=0.0):
+      xpad=(0.0, 0.0),
+      ypad=(0.0, 0.0)):
     '''plot regular X, Y'''
 
     pp([X], [Y], title, figname,
@@ -40,11 +48,11 @@ def pp(Xs, Ys, title, figname,
        trig_pi_step=Fraction(1, 4),
        xlim=None,
        ylim=None,
-       xpad=0.0,
-       ypad=0.0):
+       xpad=(0.0, 0.0),
+       ypad=(0.0, 0.0)):
     '''plot piecewise Xs and Ys'''
 
-    _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad)
+    _setup(Xs, Ys, title, holes, trig, trig_pi_step, xlim, ylim, xpad, ypad)
     _plot(Xs, Ys, holes, labels, color, same_color)
     _save(figname)
     _cleanup()
@@ -81,8 +89,8 @@ def pf(domain_func_dict, title, figname,
        trig_pi_step=Fraction(1, 4),
        xlim=None,
        ylim=None,
-       xpad=0.0,
-       ypad=0.0):
+       xpad=(0.0, 0.0),
+       ypad=(0.0, 0.0)):
     '''Plot functions'''
     Xs = []
     Ys = []
@@ -108,25 +116,30 @@ def pf(domain_func_dict, title, figname,
 
 
 def _setup(Xs, Ys, title,
+          holes=[],
           trig=False,
           trig_pi_step=0,
           xlim=None,
           ylim=None,
-          xpad=0.0,
-          ypad=0.0):
+          xpad=(0.0, 0.0),
+          ypad=(0.0, 0.0)):
     plt.clf()
     plt.title(title)
     if not xlim:
-        Xall = np.concatenate(Xs)
-        xbuff = np.fabs(Xall.max() - Xall.min()) * xpad
-        xmin = Xall.min() - xbuff
-        xmax = Xall.max() + xbuff
+        Xholes = np.array([h.x for h in holes])
+        Xall = np.concatenate(Xs + [Xholes])
+        xbuff_left = np.fabs(Xall.max() - Xall.min()) * xpad[0]
+        xbuff_right = np.fabs(Xall.max() - Xall.min()) * xpad[1]
+        xmin = Xall.min() - xbuff_left
+        xmax = Xall.max() + xbuff_right
         xlim = (xmin, xmax)
     if not ylim:
-        Yall = np.concatenate(Ys)
-        ybuff = np.fabs(Yall.max() - Yall.min()) * ypad
-        ymin = Yall.min() - ybuff
-        ymax = Yall.max() + ybuff
+        Yholes = np.array([h.y for h in holes])
+        Yall = np.concatenate(Ys + [Yholes])
+        ybuff_bottom = np.fabs(Yall.max() - Yall.min()) * ypad[0]
+        ybuff_top = np.fabs(Yall.max() - Yall.min()) * ypad[1]
+        ymin = Yall.min() - ybuff_bottom
+        ymax = Yall.max() + ybuff_top
         ylim = (ymin, ymax)
     plt.xlim(xlim)
     plt.ylim(ylim)
@@ -191,8 +204,14 @@ def _plot(Xs, Ys, holes=[], labels=[], color='red', same_color=True):
             plt.plot(X, Y, color=color, zorder=1, label=label)
         else:
             plt.plot(X, Y, zorder=1, label=label)
-    for x, y in holes:
-        plt.scatter(x, y, edgecolor=color, facecolor='white', zorder=2)
+    for hole in holes:
+        facecolor = 'white'
+        if hole.filled:
+            facecolor = hole.color
+        plt.scatter(hole.x, hole.y,
+                    edgecolor=hole.color,
+                    facecolor=facecolor,
+                    zorder=2)
     if any(labels):
         plt.legend()
     return
