@@ -11,6 +11,7 @@ if matplotlib.__version__ > '1.4':
 def p(X, Y, title, figname,
       holes=[],
       labels=[],
+      color='red',
       trig=False,
       trig_pi_step=Fraction(1, 4),
       xlim=None,
@@ -22,6 +23,7 @@ def p(X, Y, title, figname,
     pp([X], [Y], title, figname,
        holes=holes,
        labels=[],
+       color='red',
        trig=trig,
        trig_pi_step=trig_pi_step,
        xpad=xpad,
@@ -32,6 +34,7 @@ def p(X, Y, title, figname,
 def pp(Xs, Ys, title, figname,
        holes=[],
        labels=[],
+       color='red',
        same_color=True,
        trig=False,
        trig_pi_step=Fraction(1, 4),
@@ -42,7 +45,7 @@ def pp(Xs, Ys, title, figname,
     '''plot piecewise Xs and Ys'''
 
     _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad)
-    _plot(Xs, Ys, holes, labels, same_color)
+    _plot(Xs, Ys, holes, labels, color, same_color)
     _save(figname)
     _cleanup()
     return
