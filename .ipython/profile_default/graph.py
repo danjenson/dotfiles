@@ -16,8 +16,8 @@ def p(X, Y, title, figname,
       trig_pi_step=Fraction(1, 4),
       xlim=None,
       ylim=None,
-      xpad=0.1,
-      ypad=0.1):
+      xpad=0.0,
+      ypad=0.0):
     '''plot regular X, Y'''
 
     pp([X], [Y], title, figname,
@@ -40,8 +40,8 @@ def pp(Xs, Ys, title, figname,
        trig_pi_step=Fraction(1, 4),
        xlim=None,
        ylim=None,
-       xpad=0.1,
-       ypad=0.1):
+       xpad=0.0,
+       ypad=0.0):
     '''plot piecewise Xs and Ys'''
 
     _setup(Xs, Ys, title, trig, trig_pi_step, xlim, ylim, xpad, ypad)
@@ -72,23 +72,61 @@ def ped(func, x_range, lim_xy, epsilon, delta, title, figname):
     return
 
 
+def pf(domain_func_dict, title, figname,
+       holes=[],
+       labels=[],
+       color='red',
+       same_color=True,
+       trig=False,
+       trig_pi_step=Fraction(1, 4),
+       xlim=None,
+       ylim=None,
+       xpad=0.0,
+       ypad=0.0):
+    '''Plot functions'''
+    Xs = []
+    Ys = []
+    for domain, func in domain_func_dict.items():
+        X = np.linspace(domain[0], domain[1], 10000)
+        Y = np.vectorize(func)(X)
+        Xs.append(X)
+        Ys.append(Y)
+
+    pp(Xs, Ys, title, figname,
+       holes=holes,
+       labels=labels,
+       color=color,
+       same_color=same_color,
+       trig=trig,
+       trig_pi_step=trig_pi_step,
+       xlim=xlim,
+       ylim=ylim,
+       xpad=xpad,
+       ypad=ypad)
+    return
+
+
+
 def _setup(Xs, Ys, title,
-          trig=False, trig_pi_step=0,
-          xlim=None, ylim=None,
-          xpad=0.1, ypad=0.1):
+          trig=False,
+          trig_pi_step=0,
+          xlim=None,
+          ylim=None,
+          xpad=0.0,
+          ypad=0.0):
     plt.clf()
     plt.title(title)
     if not xlim:
-        X = np.concatenate(Xs)
-        xbuff = np.fabs(X.max() - X.min()) * xpad
-        xmin = X.min() - xbuff
-        xmax = X.max() + xbuff
+        Xall = np.concatenate(Xs)
+        xbuff = np.fabs(Xall.max() - Xall.min()) * xpad
+        xmin = Xall.min() - xbuff
+        xmax = Xall.max() + xbuff
         xlim = (xmin, xmax)
     if not ylim:
-        Y = np.concatenate(Ys)
-        ybuff = np.fabs(Y.max() - Y.min()) * ypad
-        ymin = Y.min() - ybuff
-        ymax = Y.max() + ybuff
+        Yall = np.concatenate(Ys)
+        ybuff = np.fabs(Yall.max() - Yall.min()) * ypad
+        ymin = Yall.min() - ybuff
+        ymax = Yall.max() + ybuff
         ylim = (ymin, ymax)
     plt.xlim(xlim)
     plt.ylim(ylim)
