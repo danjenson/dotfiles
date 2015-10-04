@@ -16,29 +16,6 @@ class Hole():
         self.color = color
 
 
-def p(X, Y, title, figname,
-      holes=[],
-      labels=[],
-      color='red',
-      trig=False,
-      trig_pi_step=Fraction(1, 4),
-      xlim=None,
-      ylim=None,
-      xpad=(0.0, 0.0),
-      ypad=(0.0, 0.0)):
-    '''plot regular X, Y'''
-
-    pp([X], [Y], title, figname,
-       holes=holes,
-       labels=[],
-       color='red',
-       trig=trig,
-       trig_pi_step=trig_pi_step,
-       xpad=xpad,
-       ypad=ypad)
-    return
-
-
 def pp(Xs, Ys, title, figname,
        holes=[],
        labels=[],
@@ -46,16 +23,41 @@ def pp(Xs, Ys, title, figname,
        same_color=True,
        trig=False,
        trig_pi_step=Fraction(1, 4),
+       xlabel=None,
+       ylabel=None,
        xlim=None,
        ylim=None,
        xpad=(0.0, 0.0),
-       ypad=(0.0, 0.0)):
+       ypad=(0.0, 0.0),
+       xticks={},
+       yticks={}):
     '''plot piecewise Xs and Ys'''
 
-    _setup(Xs, Ys, title, holes, trig, trig_pi_step, xlim, ylim, xpad, ypad)
+    _setup(Xs, Ys, title, holes, trig, trig_pi_step,
+           xlabel, ylabel, xlim, ylim, xpad, ypad, xticks, yticks)
     _plot(Xs, Ys, holes, labels, color, same_color)
     _save(figname)
     _cleanup()
+    return
+
+
+def p(X, Y, title, figname, **kwargs):
+    '''plot regular X, Y'''
+    pp([X], [Y], title, figname, **kwargs)
+    return
+
+
+def pf(func_domain_dict, title, figname, **kwargs):
+    '''Plot functions'''
+    Xs = []
+    Ys = []
+    for func, domain in func_domain_dict.items():
+        X = np.linspace(domain[0], domain[1], 10000)
+        Y = np.vectorize(func)(X)
+        Xs.append(X)
+        Ys.append(Y)
+
+    pp(Xs, Ys, title, figname, **kwargs)
     return
 
 
@@ -80,49 +82,18 @@ def ped(func, x_range, lim_xy, epsilon, delta, title, figname):
     return
 
 
-def pf(func_domain_dict, title, figname,
-       holes=[],
-       labels=[],
-       color='red',
-       same_color=True,
-       trig=False,
-       trig_pi_step=Fraction(1, 4),
-       xlim=None,
-       ylim=None,
-       xpad=(0.0, 0.0),
-       ypad=(0.0, 0.0)):
-    '''Plot functions'''
-    Xs = []
-    Ys = []
-    for func, domain in func_domain_dict.items():
-        X = np.linspace(domain[0], domain[1], 10000)
-        Y = np.vectorize(func)(X)
-        Xs.append(X)
-        Ys.append(Y)
-
-    pp(Xs, Ys, title, figname,
-       holes=holes,
-       labels=labels,
-       color=color,
-       same_color=same_color,
-       trig=trig,
-       trig_pi_step=trig_pi_step,
-       xlim=xlim,
-       ylim=ylim,
-       xpad=xpad,
-       ypad=ypad)
-    return
-
-
-
 def _setup(Xs, Ys, title,
-          holes=[],
-          trig=False,
-          trig_pi_step=0,
-          xlim=None,
-          ylim=None,
-          xpad=(0.0, 0.0),
-          ypad=(0.0, 0.0)):
+           holes=[],
+           trig=False,
+           trig_pi_step=0,
+           xlabel=None,
+           ylabel=None,
+           xlim=None,
+           ylim=None,
+           xpad=(0.0, 0.0),
+           ypad=(0.0, 0.0),
+           xticks={},
+           yticks={}):
     plt.clf()
     plt.title(title)
     if not xlim:
@@ -141,12 +112,20 @@ def _setup(Xs, Ys, title,
         ymin = Yall.min() - ybuff_bottom
         ymax = Yall.max() + ybuff_top
         ylim = (ymin, ymax)
-    plt.xlim(xlim)
-    plt.ylim(ylim)
-    plt.axhline(0, color='black')
-    plt.axvline(0, color='black')
     if trig:
         _add_trig_labels(plt.axes(), xmin, xmax, ymin, ymax, trig_pi_step)
+    if xlabel:
+        plt.axes().set_xlabel(xlabel)
+    if ylabel:
+        plt.axes().set_ylabel(ylabel)
+    plt.xlim(xlim)
+    plt.ylim(ylim)
+    if xticks:
+        _add_ticks(plt.axes(), xticks, 'x')
+    if yticks:
+        _add_ticks(plt.axes(), yticks, 'y')
+    plt.axhline(0, color='black')
+    plt.axvline(0, color='black')
     return
 
 
