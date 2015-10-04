@@ -80,7 +80,7 @@ def ped(func, x_range, lim_xy, epsilon, delta, title, figname):
     return
 
 
-def pf(domain_func_dict, title, figname,
+def pf(func_domain_dict, title, figname,
        holes=[],
        labels=[],
        color='red',
@@ -94,7 +94,7 @@ def pf(domain_func_dict, title, figname,
     '''Plot functions'''
     Xs = []
     Ys = []
-    for domain, func in domain_func_dict.items():
+    for func, domain in func_domain_dict.items():
         X = np.linspace(domain[0], domain[1], 10000)
         Y = np.vectorize(func)(X)
         Xs.append(X)
