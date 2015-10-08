@@ -47,15 +47,20 @@ def p(X, Y, title, figname, **kwargs):
     return
 
 
-def pf(func_domain_dict, title, figname, **kwargs):
+def pf(func_domains_dict, title, figname, **kwargs):
     '''Plot functions'''
     Xs = []
     Ys = []
-    for func, domain in func_domain_dict.items():
-        X = np.linspace(domain[0], domain[1], 10000)
-        Y = np.vectorize(func)(X)
-        Xs.append(X)
-        Ys.append(Y)
+    for func, domains in func_domains_dict.items():
+        # convert to list if single tuple passed
+        vfunc = np.vectorize(func)
+        if isinstance(domains, tuple):
+            domains = [domains]
+        for start_x, end_x in domains:
+            X = np.linspace(start_x, end_x, 10000)
+            Y = vfunc(X)
+            Xs.append(X)
+            Ys.append(Y)
 
     pp(Xs, Ys, title, figname, **kwargs)
     return
