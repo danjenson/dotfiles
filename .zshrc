@@ -81,7 +81,7 @@ cpp ()
 }
 gl ()
 {
-    mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL $1 -lGL -lglut -lm -lGLU -std='c++11'
+    mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL $1 -lGL -lglut -lm -lGLU
 }
 topc ()
 {
