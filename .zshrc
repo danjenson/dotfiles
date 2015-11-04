@@ -81,7 +81,7 @@ cpp ()
 }
 gl ()
 {
-    mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL $1 -lGL -lglut -lm -lGLU
+    mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL "$@" -lGL -lglut -lm -lGLU
 }
 topc ()
 {
