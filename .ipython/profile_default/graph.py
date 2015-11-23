@@ -1,3 +1,4 @@
+import os
 import matplotlib
 import matplotlib.pyplot as plt
 import itertools as it
@@ -261,7 +262,11 @@ def _add_ticks(axes, tick_labels_dict, axis='x'):
 
 
 def _save(figname):
-    plt.savefig('figures/' + figname + '.pdf')
+    directory = 'figures'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    full_path = os.path.join(directory, figname + '.pdf')
+    plt.savefig(full_path)
     return
 
 
