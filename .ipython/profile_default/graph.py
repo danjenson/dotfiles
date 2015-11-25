@@ -17,7 +17,9 @@ class Hole():
         self.color = color
 
 
-def pp(Xs, Ys, title, figname,
+def pp(Xs, Ys,
+       title=None,
+       figname=None,
        holes=[],
        labels=[],
        color='red',
@@ -37,18 +39,21 @@ def pp(Xs, Ys, title, figname,
     _setup(Xs, Ys, title, holes, trig, trig_pi_step,
            xlabel, ylabel, xlim, ylim, xpad, ypad, xticks, yticks)
     _plot(Xs, Ys, holes, labels, color, same_color)
-    _save(figname)
+    if figname:
+        _save(figname)
+    else:
+        plt.show()
     _cleanup()
     return
 
 
-def p(X, Y, title, figname, **kwargs):
+def p(X, Y, **kwargs):
     '''plot regular X, Y'''
-    pp([X], [Y], title, figname, **kwargs)
+    pp([X], [Y], **kwargs)
     return
 
 
-def pf(func_domains_dict, title, figname, **kwargs):
+def pf(func_domains_dict, **kwargs):
     '''Plot functions'''
     Xs = []
     Ys = []
@@ -63,11 +68,11 @@ def pf(func_domains_dict, title, figname, **kwargs):
             Xs.append(X)
             Ys.append(Y)
 
-    pp(Xs, Ys, title, figname, **kwargs)
+    pp(Xs, Ys, **kwargs)
     return
 
 
-def ped(func, x_range, lim_xy, epsilon, delta, title, figname):
+def ped(func, x_range, lim_xy, epsilon, delta, **kwargs):
     '''plot epsilon-delta'''
     X = np.linspace(x_range[0], x_range[1])
     Y = np.vectorize(func)(X)
@@ -83,12 +88,16 @@ def ped(func, x_range, lim_xy, epsilon, delta, title, figname):
     _add_limit_label(plt.axes(), lim_xy)
     _add_epsilon_labels(plt.axes(), lim_y, epsilon)
     _add_delta_labels(plt.axes(), lim_x, delta)
-    _save(figname)
+    if kwargs['figname']:
+        _save(kwargs['figname'])
+    else:
+        plt.show()
     _cleanup()
     return
 
 
-def _setup(Xs, Ys, title,
+def _setup(Xs, Ys,
+           title=None,
            holes=[],
            trig=False,
            trig_pi_step=0,
@@ -101,7 +110,8 @@ def _setup(Xs, Ys, title,
            xticks={},
            yticks={}):
     plt.clf()
-    plt.title(title)
+    if title:
+        plt.title(title)
     if not xlim:
         Xholes = np.array([h.x for h in holes])
         Xall = np.concatenate(Xs + [Xholes])

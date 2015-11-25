@@ -11,6 +11,7 @@ c.InteractiveShellApp.exec_lines = [
             'import os',
             'import sys',
             'import json',
+            'import math',
             'import pickle',
             'import datetime as dt',
             'import itertools as it',
