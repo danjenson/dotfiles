@@ -4,8 +4,9 @@ syntax on                   " syntax highlighting
 set nocompatible            " be iMproved, require this
 set backspace=2             " vim 7.4 fix
 
-" set compiler for c++
-set makeprg=clang++\ -o\ out/%<\ -std='c++11'\ %
+" set shell to run in as zsh
+set shell=/usr/bin/zsh
+set shellcmdflag=-ic
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
