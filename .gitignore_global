@@ -43,3 +43,7 @@ Thumbs.db
 ######################
 *.netrwhist
 *.swp
+
+# Python files #
+# ####################
+fontList.py3k.cache

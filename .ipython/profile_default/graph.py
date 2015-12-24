@@ -41,9 +41,9 @@ def pp(Xs, Ys,
     _plot(Xs, Ys, holes, labels, color, same_color)
     if figname:
         _save(figname)
+        _cleanup()
     else:
         plt.show()
-    _cleanup()
     return
 
 
