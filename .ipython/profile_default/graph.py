@@ -41,9 +41,6 @@ def pp(Xs, Ys,
     _plot(Xs, Ys, holes, labels, color, same_color)
     if figname:
         _save(figname)
-        _cleanup()
-    else:
-        plt.show()
     return
 
 
@@ -53,11 +50,14 @@ def p(X, Y, **kwargs):
     return
 
 
-def pf(func_domains_dict, **kwargs):
+def pf(func_domains_tpl_list, **kwargs):
     '''Plot functions'''
     Xs = []
     Ys = []
-    for func, domains in func_domains_dict.items():
+    # convenience when plotting only one function
+    if isinstance(func_domains_tpl_list, tuple):
+        func_domains_tpl_list = [func_domains_tpl_list]
+    for func, domains in func_domains_tpl_list:
         # convert to list if single tuple passed
         vfunc = np.vectorize(func)
         if isinstance(domains, tuple):
