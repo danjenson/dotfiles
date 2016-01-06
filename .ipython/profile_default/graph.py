@@ -3,6 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import itertools as it
 import numpy as np
+from matplotlib.patches import Rectangle
 from fractions import Fraction
 
 if matplotlib.__version__ > '1.4':
@@ -21,6 +22,7 @@ def pp(Xs, Ys,
        title=None,
        figname=None,
        holes=[],
+       rects=[],
        labels=[],
        color='red',
        same_color=True,
@@ -38,7 +40,7 @@ def pp(Xs, Ys,
 
     _setup(Xs, Ys, title, holes, trig, trig_pi_step,
            xlabel, ylabel, xlim, ylim, xpad, ypad, xticks, yticks)
-    _plot(Xs, Ys, holes, labels, color, same_color)
+    _plot(Xs, Ys, holes, rects, labels, color, same_color)
     if figname:
         _save(figname)
     return
@@ -94,6 +96,20 @@ def ped(func, x_range, lim_xy, epsilon, delta, **kwargs):
         plt.show()
     _cleanup()
     return
+
+
+def psum(func, domain, n_rects, position='left', **kwargs):
+    dx = (domain[1] - domain[0]) / n_rects
+    rects = []
+    for i in range(n_rects):
+        x = {'left': i * dx,
+             'right': i * dx + dx,
+             'midpoint': ((i * dx) + (i * dx + dx)) / 2}[position]
+        y = func(x)
+        rects.append(Rectangle((i * dx, 0),     # (x, y)
+                                dx, y,          # width, height
+                                alpha=0.5))     # alpha
+    pf([(func, domain)], rects=rects, **kwargs)
 
 
 def _setup(Xs, Ys,
@@ -188,7 +204,7 @@ def _trig_axis(v, pi_step):
     return ticks, labels
 
 
-def _plot(Xs, Ys, holes=[], labels=[], color='red', same_color=True):
+def _plot(Xs, Ys, holes=[], rects=[], labels=[], color='red', same_color=True):
     # if more Y-sets than X-sets, reuse X coordinates by cycling
     if len(Ys) > len(Xs):
         Xs = it.cycle(Xs)
@@ -207,6 +223,10 @@ def _plot(Xs, Ys, holes=[], labels=[], color='red', same_color=True):
                     edgecolor=hole.color,
                     facecolor=facecolor,
                     zorder=2)
+    if rects:
+        ax = plt.gca()
+        for rect in rects:
+            ax.add_patch(rect)
     if any(labels):
         plt.legend()
     return
