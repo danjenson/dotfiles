@@ -28,7 +28,7 @@
 # You can also deploy your own backend outside of matplotlib by
 # referring to the module name (which must be in the PYTHONPATH) as
 # 'module://my_backend'
-backend      : MacOSX
+backend      : TkAgg
 
 # if you are runing pyplot inside a GUI and your backend choice
 # conflicts, we will automatically try and find a compatible one for
@@ -103,7 +103,7 @@ patch.antialiased      : True    # render patches in antialised (no jaggies)
 # The font.size property is the default font size for text, given in pts.
 # 12pt is the standard value.
 #
-font.family          : monospace
+#font.family         : monospace
 #font.style          : normal
 #font.variant        : normal
 #font.weight         : medium
@@ -118,7 +118,7 @@ font.size           : 10.0
 #font.sans-serif     : Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
 #font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, cursive
 #font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, fantasy
-font.monospace      : Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+# font.monospace      : Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
 
 ### TEXT
 # text properties used by text.Text.  See
@@ -211,16 +211,7 @@ axes.axisbelow      : True     # whether axis gridlines and ticks are below
                                # first or larger than the second
 #axes.unicode_minus  : True    # use unicode for the minus symbol
                                # rather than hypen.  See http://en.wikipedia.org/wiki/Plus_sign#Plus_sign
-axes.color_cycle    : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
-                      # E24A33 : orange
-                      # 7A68A6 : purple
-                      # 348ABD : blue
-                      # 188487 : turquoise
-                      # A60628 : red
-                      # CF4457 : pink
-                      # 467821 : green
-                                            
-                                            
+axes.prop_cycle    : cycler('color', 'bgrcmyk')
                                             
                                             
                                             # color cycle for plot lines
