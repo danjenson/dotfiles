@@ -5,7 +5,7 @@ set nocompatible            " be iMproved, require this
 set backspace=2             " vim 7.4 fix
 
 " set shell to run in as zsh
-set shell=/usr/local/bin/zsh
+set shell=/bin/zsh
 set shellcmdflag=-c
 
 " set the runtime path to include Vundle and initialize
