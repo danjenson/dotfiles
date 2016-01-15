@@ -5,8 +5,8 @@ set nocompatible            " be iMproved, require this
 set backspace=2             " vim 7.4 fix
 
 " set shell to run in as zsh
-set shell=/usr/bin/zsh
-set shellcmdflag=-ic
+set shell=/usr/local/bin/zsh
+set shellcmdflag=-c
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -19,7 +19,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'delimitMate.vim'
-Plugin 'vim-glsl'
+" Plugin 'vim-glsl'
 " Plugin 'gerw/vim-latex-suite'
 
 " NOTE: to install YouCompleteMe
