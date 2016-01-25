@@ -143,9 +143,9 @@ alias v='vim'
 alias vs='vim ~/dotfiles/vim_shortcuts.txt'
 alias -s c,h,sh,html,css,js,php,py,sql=vim
 if [[ $(uname) == 'Darwin' ]]; then
-  alias ls='ls -G -pt'
+  alias ls='ls -G'
 else
-  alias ls='ls --color -pt'
+  alias ls='ls --color'
 fi
 
 # Source local
