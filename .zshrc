@@ -79,6 +79,10 @@ cpp ()
 {
     mkdir -p out && clang++ -std='c++11' -o out/${1:r} ${@}
 }
+c ()
+{
+    mkdir -p out && gcc -o out/${1:r} ${@}
+}
 glc ()
 {
     mkdir -p out && g++ -g -o out/${1:r} -I/usr/include/GL "$@" -lGL -lglut -lm -lGLU
