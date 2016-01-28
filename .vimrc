@@ -74,6 +74,12 @@ map <C-m> <C-w>_
 nmap \| <C-w>v
 nmap <C-_> <C-w>s
 
+" ctags shortcuts
+" open tag in new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+" open tag in vertical split window
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
 " colorscheme
 colorscheme desert
 
