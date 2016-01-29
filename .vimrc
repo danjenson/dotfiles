@@ -59,7 +59,8 @@ set tags=./tags;/ "Looks for tags in the pwd of the current file; stops at root
 set path+=** "Searches directories recursively
 set colorcolumn=81 "To help from going over 80 char limit
 set textwidth=80 "Automatically wrap at 80 chars
-set statusline+=%F
+set statusline+=%F "Full file path in statusline
+set complete-=i "Don't search included files [slow]
 
 " File-specific indentation
 autocmd BufRead, BufNewFile *.py, *.c, *.h set ts=2 sts=2 sw=2
