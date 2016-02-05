@@ -15,6 +15,7 @@ call vundle#begin()
 
 " put plugins here, run :PluginInstall to install
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
+Plugin 'scrooloose/syntastic' "syntax checker
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
