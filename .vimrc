@@ -19,6 +19,7 @@ Plugin 'scrooloose/syntastic' "syntax checker
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
+Plugin 'scrooloose/syntastic'
 Plugin 'delimitMate.vim'
 " Plugin 'vim-glsl'
 " Plugin 'gerw/vim-latex-suite'
