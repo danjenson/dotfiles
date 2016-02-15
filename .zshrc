@@ -140,7 +140,6 @@ ta ()
 # Aliases
 alias ..='cd ..'
 alias cl='clear'
-alias gdb='gdb -tui'
 alias ipy='ipython'
 alias ll='ls -lh'
 alias m='less'
