@@ -11,5 +11,6 @@ ignore = ~/.hgignore_global
 # color =
 # pager = vim
 fetch =
+purge =
 histedit=
 hgext.convert=
