@@ -98,6 +98,9 @@ let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '!'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+
+" syntastic
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
 nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
