@@ -20,6 +20,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'delimitMate.vim'
+Plugin 'Yggdroot/indentLine'
 " Plugin 'vim-glsl'
 " Plugin 'gerw/vim-latex-suite'
 
